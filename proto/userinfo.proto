@@ -1,0 +1,26 @@
+syntax = "proto3";
+package turingera.svr.userinfo;
+option go_package = "github.com/turing-era/turingera-proto/pb/svr/userinfo";
+
+message UserInfo {
+  string user_id = 1;
+  string nick = 2;
+  string avatar = 3;
+  uint32 login_type = 4;
+  string platform_uid = 5;
+  string email = 6;
+  int64 register_time = 7;
+}
+
+message GetUserInfoReq {
+
+}
+
+message GetUserInfoRsp {
+  UserInfo user = 1;
+}
+
+service Userinfo {
+  // 获取用户信息
+  rpc GetUserInfo(GetUserInfoReq) returns (GetUserInfoRsp);
+}

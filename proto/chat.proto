@@ -1,0 +1,82 @@
+syntax = "proto3";
+package turingera.svr.chat;
+option go_package = "github.com/turing-era/turingera-proto/pb/svr/chat";
+
+message Message {
+  string id = 1;
+  string user = 2;
+  int64 created_at = 3;
+  string text = 4;
+}
+
+message Info {
+  string chat_id = 1;
+  uint32 chat_time = 2;
+  string user_id = 3;
+  int64 created_at = 4;
+  uint32 num_participants = 5;
+  string partner_id = 6;
+  string partner_name = 7;
+  string partner_avatar = 8;
+  bool is_my_turn = 9;
+  uint32 turn_time = 10;
+  bool is_active = 11;
+  bool assign = 12;
+
+  repeated Message messages = 20;
+
+  bool guessed = 50;
+  bool correct = 51;
+}
+
+message NewChatReq {
+  string robot_id = 1; // 对话机器人ID，为空表示匹配
+}
+
+message NewChatRsp {
+  Info info = 1;
+}
+
+message WaitMessageReq {
+  string chat_id = 1;
+}
+
+message WaitMessageRsp {
+  Info info = 1;
+}
+
+message SendMessageReq {
+  string chat_id = 1;
+  string text = 2;
+}
+
+message SendMessageRsp {
+  Info info = 1;
+}
+
+enum UserType {
+  USER_TYPE_HUMAN = 0;
+  USER_TYPE_ROBOT = 1;
+}
+
+message GuessReq {
+  string chat_id = 1;
+  uint32 partner_type = 2; // UserType
+}
+
+message GuessRsp {
+  uint32 partner_type = 1; // UserType
+  bool correct = 2;
+}
+
+service ChatSvr {
+  // 新建对话
+  rpc NewChat (NewChatReq) returns (NewChatRsp);
+  // 等待消息
+  rpc WaitMessage (WaitMessageReq) returns (WaitMessageRsp);
+  // 发送消息
+  rpc SendMessage (SendMessageReq) returns (SendMessageRsp);
+  // 做出判断
+  rpc Guess (GuessReq) returns (GuessRsp);
+
+}

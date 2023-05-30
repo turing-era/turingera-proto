@@ -1,0 +1,68 @@
+type: google.api.Service
+config_version: 3
+
+http:
+  rules:
+    # 新建对话
+    - selector: turingera.svr.chat.ChatSvr.NewChat
+      post: /chat/NewChat
+      body: "*"
+    # 等待消息
+    - selector: turingera.svr.chat.ChatSvr.WaitMessage
+      post: /chat/WaitMessage
+      body: "*"
+    # 发送消息
+    - selector: turingera.svr.chat.ChatSvr.SendMessage
+      post: /chat/SendMessage
+      body: "*"
+    # 做出判断
+    - selector: turingera.svr.chat.ChatSvr.Guess
+      post: /chat/Guess
+      body: "*"
+
+    # 获取性别列表
+    - selector: turingera.svr.robot.RobotSvr.GetGenderList
+      post: /robot/GetGenderList
+      body: "*"
+    # 获取身份列表
+    - selector: turingera.svr.robot.RobotSvr.GetIdentityList
+      post: /robot/GetIdentityList
+      body: "*"
+    # 获取标签列表
+    - selector: turingera.svr.robot.RobotSvr.GetTagList
+      post: /robot/GetTagList
+      body: "*"
+    # 获取AI
+    - selector: turingera.svr.robot.RobotSvr.GetRobot
+      post: /robot/GetRobot
+      body: "*"
+    # 新建AI
+    - selector: turingera.svr.robot.RobotSvr.NewRobot
+      post: /robot/NewRobot
+      body: "*"
+    # 编辑AI
+    - selector: turingera.svr.robot.RobotSvr.EditRobot
+      post: /robot/EditRobot
+      body: "*"
+    # 删除AI
+    - selector: turingera.svr.robot.RobotSvr.DeleteRobot
+      post: /robot/DeleteRobot
+      body: "*"
+    # 获取我的AI列表
+    - selector: turingera.svr.robot.RobotSvr.GetRobots
+      post: /robot/GetRobots
+      body: "*"
+    # 推荐AI列表
+    - selector: turingera.svr.robot.RobotSvr.RecommendRobots
+      post: /robot/RecommendRobots
+      body: "*"
+
+    # 登录
+    - selector: turingera.svr.auth.Auth.Login
+      post: /auth/Login
+      body: "*"
+
+    # 获取用户信息
+    - selector: turingera.svr.userinfo.Userinfo.GetUserInfo
+      post: /userinfo/GetUserInfo
+      body: "*"

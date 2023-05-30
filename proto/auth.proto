@@ -1,0 +1,26 @@
+syntax = "proto3";
+package turingera.svr.auth;
+option go_package = "github.com/turing-era/turingera-proto/pb/svr/auth";
+
+enum LoginType {
+  LOGIN_TYPE_UNKNOWN = 0;
+  LOGIN_TYPE_GOOGLE = 1; // google
+  LOGIN_TYPE_TWITTER = 2; // twitter
+  LOGIN_TYPE_WALLET = 3; // 钱包
+}
+
+message LoginReq {
+  string access_token = 1;
+  string secret = 2;
+  uint32 login_type = 10;
+}
+
+message LoginRsp {
+  string token = 1;
+  int32 expire = 2;
+}
+
+service Auth {
+  // 登录
+  rpc Login(LoginReq) returns (LoginRsp);
+}
