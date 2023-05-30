@@ -42,7 +42,7 @@ func NewChatSvrClient(cc grpc.ClientConnInterface) ChatSvrClient {
 
 func (c *chatSvrClient) NewChat(ctx context.Context, in *NewChatReq, opts ...grpc.CallOption) (*NewChatRsp, error) {
 	out := new(NewChatRsp)
-	err := c.cc.Invoke(ctx, "/turingera.svr.chat.ChatSvr/NewChat", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/turingera.server.chat.ChatSvr/NewChat", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ func (c *chatSvrClient) NewChat(ctx context.Context, in *NewChatReq, opts ...grp
 
 func (c *chatSvrClient) WaitMessage(ctx context.Context, in *WaitMessageReq, opts ...grpc.CallOption) (*WaitMessageRsp, error) {
 	out := new(WaitMessageRsp)
-	err := c.cc.Invoke(ctx, "/turingera.svr.chat.ChatSvr/WaitMessage", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/turingera.server.chat.ChatSvr/WaitMessage", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -60,7 +60,7 @@ func (c *chatSvrClient) WaitMessage(ctx context.Context, in *WaitMessageReq, opt
 
 func (c *chatSvrClient) SendMessage(ctx context.Context, in *SendMessageReq, opts ...grpc.CallOption) (*SendMessageRsp, error) {
 	out := new(SendMessageRsp)
-	err := c.cc.Invoke(ctx, "/turingera.svr.chat.ChatSvr/SendMessage", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/turingera.server.chat.ChatSvr/SendMessage", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -69,7 +69,7 @@ func (c *chatSvrClient) SendMessage(ctx context.Context, in *SendMessageReq, opt
 
 func (c *chatSvrClient) Guess(ctx context.Context, in *GuessReq, opts ...grpc.CallOption) (*GuessRsp, error) {
 	out := new(GuessRsp)
-	err := c.cc.Invoke(ctx, "/turingera.svr.chat.ChatSvr/Guess", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/turingera.server.chat.ChatSvr/Guess", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -130,7 +130,7 @@ func _ChatSvr_NewChat_Handler(srv interface{}, ctx context.Context, dec func(int
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/turingera.svr.chat.ChatSvr/NewChat",
+		FullMethod: "/turingera.server.chat.ChatSvr/NewChat",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ChatSvrServer).NewChat(ctx, req.(*NewChatReq))
@@ -148,7 +148,7 @@ func _ChatSvr_WaitMessage_Handler(srv interface{}, ctx context.Context, dec func
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/turingera.svr.chat.ChatSvr/WaitMessage",
+		FullMethod: "/turingera.server.chat.ChatSvr/WaitMessage",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ChatSvrServer).WaitMessage(ctx, req.(*WaitMessageReq))
@@ -166,7 +166,7 @@ func _ChatSvr_SendMessage_Handler(srv interface{}, ctx context.Context, dec func
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/turingera.svr.chat.ChatSvr/SendMessage",
+		FullMethod: "/turingera.server.chat.ChatSvr/SendMessage",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ChatSvrServer).SendMessage(ctx, req.(*SendMessageReq))
@@ -184,7 +184,7 @@ func _ChatSvr_Guess_Handler(srv interface{}, ctx context.Context, dec func(inter
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/turingera.svr.chat.ChatSvr/Guess",
+		FullMethod: "/turingera.server.chat.ChatSvr/Guess",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ChatSvrServer).Guess(ctx, req.(*GuessReq))
@@ -196,7 +196,7 @@ func _ChatSvr_Guess_Handler(srv interface{}, ctx context.Context, dec func(inter
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var ChatSvr_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "turingera.svr.chat.ChatSvr",
+	ServiceName: "turingera.server.chat.ChatSvr",
 	HandlerType: (*ChatSvrServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{

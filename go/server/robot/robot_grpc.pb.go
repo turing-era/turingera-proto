@@ -4,7 +4,7 @@
 // - protoc             v3.21.8
 // source: robot.proto
 
-package chat
+package robot
 
 import (
 	context "context"
@@ -52,7 +52,7 @@ func NewRobotSvrClient(cc grpc.ClientConnInterface) RobotSvrClient {
 
 func (c *robotSvrClient) GetGenderList(ctx context.Context, in *GetGenderListReq, opts ...grpc.CallOption) (*GetGenderListRsp, error) {
 	out := new(GetGenderListRsp)
-	err := c.cc.Invoke(ctx, "/turingera.svr.robot.RobotSvr/GetGenderList", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/turingera.server.robot.RobotSvr/GetGenderList", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -61,7 +61,7 @@ func (c *robotSvrClient) GetGenderList(ctx context.Context, in *GetGenderListReq
 
 func (c *robotSvrClient) GetIdentityList(ctx context.Context, in *GetIdentityListReq, opts ...grpc.CallOption) (*GetIdentityListRsp, error) {
 	out := new(GetIdentityListRsp)
-	err := c.cc.Invoke(ctx, "/turingera.svr.robot.RobotSvr/GetIdentityList", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/turingera.server.robot.RobotSvr/GetIdentityList", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -70,7 +70,7 @@ func (c *robotSvrClient) GetIdentityList(ctx context.Context, in *GetIdentityLis
 
 func (c *robotSvrClient) GetTagList(ctx context.Context, in *GetTagListReq, opts ...grpc.CallOption) (*GetTagListRsp, error) {
 	out := new(GetTagListRsp)
-	err := c.cc.Invoke(ctx, "/turingera.svr.robot.RobotSvr/GetTagList", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/turingera.server.robot.RobotSvr/GetTagList", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -79,7 +79,7 @@ func (c *robotSvrClient) GetTagList(ctx context.Context, in *GetTagListReq, opts
 
 func (c *robotSvrClient) GetRobot(ctx context.Context, in *GetRobotReq, opts ...grpc.CallOption) (*GetRobotRsp, error) {
 	out := new(GetRobotRsp)
-	err := c.cc.Invoke(ctx, "/turingera.svr.robot.RobotSvr/GetRobot", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/turingera.server.robot.RobotSvr/GetRobot", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -88,7 +88,7 @@ func (c *robotSvrClient) GetRobot(ctx context.Context, in *GetRobotReq, opts ...
 
 func (c *robotSvrClient) NewRobot(ctx context.Context, in *NewRobotReq, opts ...grpc.CallOption) (*NewRobotRsp, error) {
 	out := new(NewRobotRsp)
-	err := c.cc.Invoke(ctx, "/turingera.svr.robot.RobotSvr/NewRobot", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/turingera.server.robot.RobotSvr/NewRobot", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -97,7 +97,7 @@ func (c *robotSvrClient) NewRobot(ctx context.Context, in *NewRobotReq, opts ...
 
 func (c *robotSvrClient) EditRobot(ctx context.Context, in *EditRobotReq, opts ...grpc.CallOption) (*EditRobotRsp, error) {
 	out := new(EditRobotRsp)
-	err := c.cc.Invoke(ctx, "/turingera.svr.robot.RobotSvr/EditRobot", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/turingera.server.robot.RobotSvr/EditRobot", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -106,7 +106,7 @@ func (c *robotSvrClient) EditRobot(ctx context.Context, in *EditRobotReq, opts .
 
 func (c *robotSvrClient) DeleteRobot(ctx context.Context, in *DeleteRobotReq, opts ...grpc.CallOption) (*DeleteRobotRsp, error) {
 	out := new(DeleteRobotRsp)
-	err := c.cc.Invoke(ctx, "/turingera.svr.robot.RobotSvr/DeleteRobot", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/turingera.server.robot.RobotSvr/DeleteRobot", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -115,7 +115,7 @@ func (c *robotSvrClient) DeleteRobot(ctx context.Context, in *DeleteRobotReq, op
 
 func (c *robotSvrClient) GetRobots(ctx context.Context, in *GetRobotsReq, opts ...grpc.CallOption) (*GetRobotsRsp, error) {
 	out := new(GetRobotsRsp)
-	err := c.cc.Invoke(ctx, "/turingera.svr.robot.RobotSvr/GetRobots", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/turingera.server.robot.RobotSvr/GetRobots", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -124,7 +124,7 @@ func (c *robotSvrClient) GetRobots(ctx context.Context, in *GetRobotsReq, opts .
 
 func (c *robotSvrClient) RecommendRobots(ctx context.Context, in *RecommendRobotsReq, opts ...grpc.CallOption) (*RecommendRobotsRsp, error) {
 	out := new(RecommendRobotsRsp)
-	err := c.cc.Invoke(ctx, "/turingera.svr.robot.RobotSvr/RecommendRobots", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/turingera.server.robot.RobotSvr/RecommendRobots", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -210,7 +210,7 @@ func _RobotSvr_GetGenderList_Handler(srv interface{}, ctx context.Context, dec f
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/turingera.svr.robot.RobotSvr/GetGenderList",
+		FullMethod: "/turingera.server.robot.RobotSvr/GetGenderList",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(RobotSvrServer).GetGenderList(ctx, req.(*GetGenderListReq))
@@ -228,7 +228,7 @@ func _RobotSvr_GetIdentityList_Handler(srv interface{}, ctx context.Context, dec
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/turingera.svr.robot.RobotSvr/GetIdentityList",
+		FullMethod: "/turingera.server.robot.RobotSvr/GetIdentityList",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(RobotSvrServer).GetIdentityList(ctx, req.(*GetIdentityListReq))
@@ -246,7 +246,7 @@ func _RobotSvr_GetTagList_Handler(srv interface{}, ctx context.Context, dec func
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/turingera.svr.robot.RobotSvr/GetTagList",
+		FullMethod: "/turingera.server.robot.RobotSvr/GetTagList",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(RobotSvrServer).GetTagList(ctx, req.(*GetTagListReq))
@@ -264,7 +264,7 @@ func _RobotSvr_GetRobot_Handler(srv interface{}, ctx context.Context, dec func(i
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/turingera.svr.robot.RobotSvr/GetRobot",
+		FullMethod: "/turingera.server.robot.RobotSvr/GetRobot",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(RobotSvrServer).GetRobot(ctx, req.(*GetRobotReq))
@@ -282,7 +282,7 @@ func _RobotSvr_NewRobot_Handler(srv interface{}, ctx context.Context, dec func(i
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/turingera.svr.robot.RobotSvr/NewRobot",
+		FullMethod: "/turingera.server.robot.RobotSvr/NewRobot",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(RobotSvrServer).NewRobot(ctx, req.(*NewRobotReq))
@@ -300,7 +300,7 @@ func _RobotSvr_EditRobot_Handler(srv interface{}, ctx context.Context, dec func(
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/turingera.svr.robot.RobotSvr/EditRobot",
+		FullMethod: "/turingera.server.robot.RobotSvr/EditRobot",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(RobotSvrServer).EditRobot(ctx, req.(*EditRobotReq))
@@ -318,7 +318,7 @@ func _RobotSvr_DeleteRobot_Handler(srv interface{}, ctx context.Context, dec fun
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/turingera.svr.robot.RobotSvr/DeleteRobot",
+		FullMethod: "/turingera.server.robot.RobotSvr/DeleteRobot",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(RobotSvrServer).DeleteRobot(ctx, req.(*DeleteRobotReq))
@@ -336,7 +336,7 @@ func _RobotSvr_GetRobots_Handler(srv interface{}, ctx context.Context, dec func(
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/turingera.svr.robot.RobotSvr/GetRobots",
+		FullMethod: "/turingera.server.robot.RobotSvr/GetRobots",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(RobotSvrServer).GetRobots(ctx, req.(*GetRobotsReq))
@@ -354,7 +354,7 @@ func _RobotSvr_RecommendRobots_Handler(srv interface{}, ctx context.Context, dec
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/turingera.svr.robot.RobotSvr/RecommendRobots",
+		FullMethod: "/turingera.server.robot.RobotSvr/RecommendRobots",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(RobotSvrServer).RecommendRobots(ctx, req.(*RecommendRobotsReq))
@@ -366,7 +366,7 @@ func _RobotSvr_RecommendRobots_Handler(srv interface{}, ctx context.Context, dec
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var RobotSvr_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "turingera.svr.robot.RobotSvr",
+	ServiceName: "turingera.server.robot.RobotSvr",
 	HandlerType: (*RobotSvrServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{

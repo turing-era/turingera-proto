@@ -79,7 +79,7 @@ func RegisterUserinfoHandlerServer(ctx context.Context, mux *runtime.ServeMux, s
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/turingera.svr.userinfo.Userinfo/GetUserInfo", runtime.WithHTTPPathPattern("/userinfo/GetUserInfo"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/turingera.server.userinfo.Userinfo/GetUserInfo", runtime.WithHTTPPathPattern("/userinfo/GetUserInfo"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -143,7 +143,7 @@ func RegisterUserinfoHandlerClient(ctx context.Context, mux *runtime.ServeMux, c
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/turingera.svr.userinfo.Userinfo/GetUserInfo", runtime.WithHTTPPathPattern("/userinfo/GetUserInfo"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/turingera.server.userinfo.Userinfo/GetUserInfo", runtime.WithHTTPPathPattern("/userinfo/GetUserInfo"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return

@@ -2,11 +2,11 @@
 // source: robot.proto
 
 /*
-Package chat is a reverse proxy.
+Package robot is a reverse proxy.
 
 It translates gRPC into RESTful JSON APIs.
 */
-package chat
+package robot
 
 import (
 	"context"
@@ -351,7 +351,7 @@ func RegisterRobotSvrHandlerServer(ctx context.Context, mux *runtime.ServeMux, s
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/turingera.svr.robot.RobotSvr/GetGenderList", runtime.WithHTTPPathPattern("/robot/GetGenderList"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/turingera.server.robot.RobotSvr/GetGenderList", runtime.WithHTTPPathPattern("/robot/GetGenderList"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -376,7 +376,7 @@ func RegisterRobotSvrHandlerServer(ctx context.Context, mux *runtime.ServeMux, s
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/turingera.svr.robot.RobotSvr/GetIdentityList", runtime.WithHTTPPathPattern("/robot/GetIdentityList"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/turingera.server.robot.RobotSvr/GetIdentityList", runtime.WithHTTPPathPattern("/robot/GetIdentityList"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -401,7 +401,7 @@ func RegisterRobotSvrHandlerServer(ctx context.Context, mux *runtime.ServeMux, s
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/turingera.svr.robot.RobotSvr/GetTagList", runtime.WithHTTPPathPattern("/robot/GetTagList"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/turingera.server.robot.RobotSvr/GetTagList", runtime.WithHTTPPathPattern("/robot/GetTagList"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -426,7 +426,7 @@ func RegisterRobotSvrHandlerServer(ctx context.Context, mux *runtime.ServeMux, s
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/turingera.svr.robot.RobotSvr/GetRobot", runtime.WithHTTPPathPattern("/robot/GetRobot"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/turingera.server.robot.RobotSvr/GetRobot", runtime.WithHTTPPathPattern("/robot/GetRobot"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -451,7 +451,7 @@ func RegisterRobotSvrHandlerServer(ctx context.Context, mux *runtime.ServeMux, s
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/turingera.svr.robot.RobotSvr/NewRobot", runtime.WithHTTPPathPattern("/robot/NewRobot"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/turingera.server.robot.RobotSvr/NewRobot", runtime.WithHTTPPathPattern("/robot/NewRobot"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -476,7 +476,7 @@ func RegisterRobotSvrHandlerServer(ctx context.Context, mux *runtime.ServeMux, s
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/turingera.svr.robot.RobotSvr/EditRobot", runtime.WithHTTPPathPattern("/robot/EditRobot"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/turingera.server.robot.RobotSvr/EditRobot", runtime.WithHTTPPathPattern("/robot/EditRobot"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -501,7 +501,7 @@ func RegisterRobotSvrHandlerServer(ctx context.Context, mux *runtime.ServeMux, s
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/turingera.svr.robot.RobotSvr/DeleteRobot", runtime.WithHTTPPathPattern("/robot/DeleteRobot"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/turingera.server.robot.RobotSvr/DeleteRobot", runtime.WithHTTPPathPattern("/robot/DeleteRobot"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -526,7 +526,7 @@ func RegisterRobotSvrHandlerServer(ctx context.Context, mux *runtime.ServeMux, s
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/turingera.svr.robot.RobotSvr/GetRobots", runtime.WithHTTPPathPattern("/robot/GetRobots"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/turingera.server.robot.RobotSvr/GetRobots", runtime.WithHTTPPathPattern("/robot/GetRobots"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -551,7 +551,7 @@ func RegisterRobotSvrHandlerServer(ctx context.Context, mux *runtime.ServeMux, s
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/turingera.svr.robot.RobotSvr/RecommendRobots", runtime.WithHTTPPathPattern("/robot/RecommendRobots"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/turingera.server.robot.RobotSvr/RecommendRobots", runtime.WithHTTPPathPattern("/robot/RecommendRobots"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -615,7 +615,7 @@ func RegisterRobotSvrHandlerClient(ctx context.Context, mux *runtime.ServeMux, c
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/turingera.svr.robot.RobotSvr/GetGenderList", runtime.WithHTTPPathPattern("/robot/GetGenderList"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/turingera.server.robot.RobotSvr/GetGenderList", runtime.WithHTTPPathPattern("/robot/GetGenderList"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -637,7 +637,7 @@ func RegisterRobotSvrHandlerClient(ctx context.Context, mux *runtime.ServeMux, c
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/turingera.svr.robot.RobotSvr/GetIdentityList", runtime.WithHTTPPathPattern("/robot/GetIdentityList"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/turingera.server.robot.RobotSvr/GetIdentityList", runtime.WithHTTPPathPattern("/robot/GetIdentityList"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -659,7 +659,7 @@ func RegisterRobotSvrHandlerClient(ctx context.Context, mux *runtime.ServeMux, c
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/turingera.svr.robot.RobotSvr/GetTagList", runtime.WithHTTPPathPattern("/robot/GetTagList"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/turingera.server.robot.RobotSvr/GetTagList", runtime.WithHTTPPathPattern("/robot/GetTagList"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -681,7 +681,7 @@ func RegisterRobotSvrHandlerClient(ctx context.Context, mux *runtime.ServeMux, c
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/turingera.svr.robot.RobotSvr/GetRobot", runtime.WithHTTPPathPattern("/robot/GetRobot"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/turingera.server.robot.RobotSvr/GetRobot", runtime.WithHTTPPathPattern("/robot/GetRobot"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -703,7 +703,7 @@ func RegisterRobotSvrHandlerClient(ctx context.Context, mux *runtime.ServeMux, c
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/turingera.svr.robot.RobotSvr/NewRobot", runtime.WithHTTPPathPattern("/robot/NewRobot"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/turingera.server.robot.RobotSvr/NewRobot", runtime.WithHTTPPathPattern("/robot/NewRobot"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -725,7 +725,7 @@ func RegisterRobotSvrHandlerClient(ctx context.Context, mux *runtime.ServeMux, c
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/turingera.svr.robot.RobotSvr/EditRobot", runtime.WithHTTPPathPattern("/robot/EditRobot"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/turingera.server.robot.RobotSvr/EditRobot", runtime.WithHTTPPathPattern("/robot/EditRobot"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -747,7 +747,7 @@ func RegisterRobotSvrHandlerClient(ctx context.Context, mux *runtime.ServeMux, c
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/turingera.svr.robot.RobotSvr/DeleteRobot", runtime.WithHTTPPathPattern("/robot/DeleteRobot"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/turingera.server.robot.RobotSvr/DeleteRobot", runtime.WithHTTPPathPattern("/robot/DeleteRobot"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -769,7 +769,7 @@ func RegisterRobotSvrHandlerClient(ctx context.Context, mux *runtime.ServeMux, c
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/turingera.svr.robot.RobotSvr/GetRobots", runtime.WithHTTPPathPattern("/robot/GetRobots"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/turingera.server.robot.RobotSvr/GetRobots", runtime.WithHTTPPathPattern("/robot/GetRobots"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -791,7 +791,7 @@ func RegisterRobotSvrHandlerClient(ctx context.Context, mux *runtime.ServeMux, c
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/turingera.svr.robot.RobotSvr/RecommendRobots", runtime.WithHTTPPathPattern("/robot/RecommendRobots"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/turingera.server.robot.RobotSvr/RecommendRobots", runtime.WithHTTPPathPattern("/robot/RecommendRobots"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return

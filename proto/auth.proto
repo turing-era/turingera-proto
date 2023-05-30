@@ -1,6 +1,6 @@
 syntax = "proto3";
-package turingera.svr.auth;
-option go_package = "github.com/turing-era/turingera-proto/pb/svr/auth";
+package turingera.server.auth;
+option go_package = "github.com/turing-era/turingera-proto/go/server/auth";
 
 enum LoginType {
   LOGIN_TYPE_UNKNOWN = 0;

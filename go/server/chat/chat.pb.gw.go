@@ -181,7 +181,7 @@ func RegisterChatSvrHandlerServer(ctx context.Context, mux *runtime.ServeMux, se
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/turingera.svr.chat.ChatSvr/NewChat", runtime.WithHTTPPathPattern("/chat/NewChat"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/turingera.server.chat.ChatSvr/NewChat", runtime.WithHTTPPathPattern("/chat/NewChat"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -206,7 +206,7 @@ func RegisterChatSvrHandlerServer(ctx context.Context, mux *runtime.ServeMux, se
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/turingera.svr.chat.ChatSvr/WaitMessage", runtime.WithHTTPPathPattern("/chat/WaitMessage"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/turingera.server.chat.ChatSvr/WaitMessage", runtime.WithHTTPPathPattern("/chat/WaitMessage"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -231,7 +231,7 @@ func RegisterChatSvrHandlerServer(ctx context.Context, mux *runtime.ServeMux, se
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/turingera.svr.chat.ChatSvr/SendMessage", runtime.WithHTTPPathPattern("/chat/SendMessage"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/turingera.server.chat.ChatSvr/SendMessage", runtime.WithHTTPPathPattern("/chat/SendMessage"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -256,7 +256,7 @@ func RegisterChatSvrHandlerServer(ctx context.Context, mux *runtime.ServeMux, se
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/turingera.svr.chat.ChatSvr/Guess", runtime.WithHTTPPathPattern("/chat/Guess"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/turingera.server.chat.ChatSvr/Guess", runtime.WithHTTPPathPattern("/chat/Guess"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -320,7 +320,7 @@ func RegisterChatSvrHandlerClient(ctx context.Context, mux *runtime.ServeMux, cl
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/turingera.svr.chat.ChatSvr/NewChat", runtime.WithHTTPPathPattern("/chat/NewChat"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/turingera.server.chat.ChatSvr/NewChat", runtime.WithHTTPPathPattern("/chat/NewChat"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -342,7 +342,7 @@ func RegisterChatSvrHandlerClient(ctx context.Context, mux *runtime.ServeMux, cl
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/turingera.svr.chat.ChatSvr/WaitMessage", runtime.WithHTTPPathPattern("/chat/WaitMessage"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/turingera.server.chat.ChatSvr/WaitMessage", runtime.WithHTTPPathPattern("/chat/WaitMessage"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -364,7 +364,7 @@ func RegisterChatSvrHandlerClient(ctx context.Context, mux *runtime.ServeMux, cl
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/turingera.svr.chat.ChatSvr/SendMessage", runtime.WithHTTPPathPattern("/chat/SendMessage"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/turingera.server.chat.ChatSvr/SendMessage", runtime.WithHTTPPathPattern("/chat/SendMessage"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -386,7 +386,7 @@ func RegisterChatSvrHandlerClient(ctx context.Context, mux *runtime.ServeMux, cl
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/turingera.svr.chat.ChatSvr/Guess", runtime.WithHTTPPathPattern("/chat/Guess"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/turingera.server.chat.ChatSvr/Guess", runtime.WithHTTPPathPattern("/chat/Guess"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return

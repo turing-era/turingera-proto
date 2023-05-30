@@ -36,7 +36,7 @@ func NewUserinfoClient(cc grpc.ClientConnInterface) UserinfoClient {
 
 func (c *userinfoClient) GetUserInfo(ctx context.Context, in *GetUserInfoReq, opts ...grpc.CallOption) (*GetUserInfoRsp, error) {
 	out := new(GetUserInfoRsp)
-	err := c.cc.Invoke(ctx, "/turingera.svr.userinfo.Userinfo/GetUserInfo", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/turingera.server.userinfo.Userinfo/GetUserInfo", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -82,7 +82,7 @@ func _Userinfo_GetUserInfo_Handler(srv interface{}, ctx context.Context, dec fun
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/turingera.svr.userinfo.Userinfo/GetUserInfo",
+		FullMethod: "/turingera.server.userinfo.Userinfo/GetUserInfo",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(UserinfoServer).GetUserInfo(ctx, req.(*GetUserInfoReq))
@@ -94,7 +94,7 @@ func _Userinfo_GetUserInfo_Handler(srv interface{}, ctx context.Context, dec fun
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var Userinfo_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "turingera.svr.userinfo.Userinfo",
+	ServiceName: "turingera.server.userinfo.Userinfo",
 	HandlerType: (*UserinfoServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
