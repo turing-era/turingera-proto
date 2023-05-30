@@ -12,6 +12,14 @@ message UserInfo {
   int64 register_time = 7;
 }
 
+message InitUserReq {
+  UserInfo user = 1;
+}
+
+message InitUserRsp {
+  string user_id = 1;
+}
+
 message GetUserInfoReq {
 
 }
@@ -21,6 +29,8 @@ message GetUserInfoRsp {
 }
 
 service Userinfo {
+  // 初始化用户
+  rpc InitUser(InitUserReq) returns (InitUserRsp);
   // 获取用户信息
   rpc GetUserInfo(GetUserInfoReq) returns (GetUserInfoRsp);
 }

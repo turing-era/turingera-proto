@@ -22,6 +22,8 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type UserinfoClient interface {
+	// 初始化用户
+	InitUser(ctx context.Context, in *InitUserReq, opts ...grpc.CallOption) (*InitUserRsp, error)
 	// 获取用户信息
 	GetUserInfo(ctx context.Context, in *GetUserInfoReq, opts ...grpc.CallOption) (*GetUserInfoRsp, error)
 }
@@ -32,6 +34,15 @@ type userinfoClient struct {
 
 func NewUserinfoClient(cc grpc.ClientConnInterface) UserinfoClient {
 	return &userinfoClient{cc}
+}
+
+func (c *userinfoClient) InitUser(ctx context.Context, in *InitUserReq, opts ...grpc.CallOption) (*InitUserRsp, error) {
+	out := new(InitUserRsp)
+	err := c.cc.Invoke(ctx, "/turingera.server.userinfo.Userinfo/InitUser", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 func (c *userinfoClient) GetUserInfo(ctx context.Context, in *GetUserInfoReq, opts ...grpc.CallOption) (*GetUserInfoRsp, error) {
@@ -47,6 +58,8 @@ func (c *userinfoClient) GetUserInfo(ctx context.Context, in *GetUserInfoReq, op
 // All implementations must embed UnimplementedUserinfoServer
 // for forward compatibility
 type UserinfoServer interface {
+	// 初始化用户
+	InitUser(context.Context, *InitUserReq) (*InitUserRsp, error)
 	// 获取用户信息
 	GetUserInfo(context.Context, *GetUserInfoReq) (*GetUserInfoRsp, error)
 	mustEmbedUnimplementedUserinfoServer()
@@ -56,6 +69,9 @@ type UserinfoServer interface {
 type UnimplementedUserinfoServer struct {
 }
 
+func (UnimplementedUserinfoServer) InitUser(context.Context, *InitUserReq) (*InitUserRsp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method InitUser not implemented")
+}
 func (UnimplementedUserinfoServer) GetUserInfo(context.Context, *GetUserInfoReq) (*GetUserInfoRsp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUserInfo not implemented")
 }
@@ -70,6 +86,24 @@ type UnsafeUserinfoServer interface {
 
 func RegisterUserinfoServer(s grpc.ServiceRegistrar, srv UserinfoServer) {
 	s.RegisterService(&Userinfo_ServiceDesc, srv)
+}
+
+func _Userinfo_InitUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(InitUserReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserinfoServer).InitUser(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/turingera.server.userinfo.Userinfo/InitUser",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserinfoServer).InitUser(ctx, req.(*InitUserReq))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 func _Userinfo_GetUserInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -97,6 +131,10 @@ var Userinfo_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "turingera.server.userinfo.Userinfo",
 	HandlerType: (*UserinfoServer)(nil),
 	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "InitUser",
+			Handler:    _Userinfo_InitUser_Handler,
+		},
 		{
 			MethodName: "GetUserInfo",
 			Handler:    _Userinfo_GetUserInfo_Handler,
