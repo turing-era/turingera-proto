@@ -50,6 +50,10 @@ http:
     - selector: turingera.server.robot.RobotSvr.GetRobot
       post: /robot/GetRobot
       body: "*"
+    # 获取AI详情
+    - selector: turingera.server.robot.RobotSvr.GetRobotDetail
+      post: /robot/GetRobotDetail
+      body: "*"
     # 新建AI
     - selector: turingera.server.robot.RobotSvr.NewRobot
       post: /robot/NewRobot

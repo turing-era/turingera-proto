@@ -61,12 +61,28 @@ message Robot {
   int64 create_time = 20;
 }
 
+message RobotDetail {
+  string robot_id = 1;
+  Gender gender = 2;
+  repeated Identity identity_list = 3;
+  repeated Tag tag_list = 4;
+}
+
 message GetRobotReq {
   string robot_id = 1;
 }
 
 message GetRobotRsp {
   Robot robot = 1;
+}
+
+message GetRobotDetailReq {
+  string robot_id = 1;
+}
+
+message GetRobotDetailRsp {
+  Robot robot = 1;
+  RobotDetail detail = 2;
 }
 
 message NewRobotReq {
@@ -123,6 +139,8 @@ service RobotSvr {
   rpc GetTagList (GetTagListReq) returns (GetTagListRsp);
   // 获取AI
   rpc GetRobot (GetRobotReq) returns (GetRobotRsp);
+  // 获取AI详情
+  rpc GetRobotDetail (GetRobotDetailReq) returns (GetRobotDetailRsp);
   // 新建AI
   rpc NewRobot (NewRobotReq) returns (NewRobotRsp);
   // 编辑AI

@@ -30,6 +30,8 @@ type RobotSvrClient interface {
 	GetTagList(ctx context.Context, in *GetTagListReq, opts ...grpc.CallOption) (*GetTagListRsp, error)
 	// 获取AI
 	GetRobot(ctx context.Context, in *GetRobotReq, opts ...grpc.CallOption) (*GetRobotRsp, error)
+	// 获取AI详情
+	GetRobotDetail(ctx context.Context, in *GetRobotDetailReq, opts ...grpc.CallOption) (*GetRobotDetailRsp, error)
 	// 新建AI
 	NewRobot(ctx context.Context, in *NewRobotReq, opts ...grpc.CallOption) (*NewRobotRsp, error)
 	// 编辑AI
@@ -80,6 +82,15 @@ func (c *robotSvrClient) GetTagList(ctx context.Context, in *GetTagListReq, opts
 func (c *robotSvrClient) GetRobot(ctx context.Context, in *GetRobotReq, opts ...grpc.CallOption) (*GetRobotRsp, error) {
 	out := new(GetRobotRsp)
 	err := c.cc.Invoke(ctx, "/turingera.server.robot.RobotSvr/GetRobot", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *robotSvrClient) GetRobotDetail(ctx context.Context, in *GetRobotDetailReq, opts ...grpc.CallOption) (*GetRobotDetailRsp, error) {
+	out := new(GetRobotDetailRsp)
+	err := c.cc.Invoke(ctx, "/turingera.server.robot.RobotSvr/GetRobotDetail", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -143,6 +154,8 @@ type RobotSvrServer interface {
 	GetTagList(context.Context, *GetTagListReq) (*GetTagListRsp, error)
 	// 获取AI
 	GetRobot(context.Context, *GetRobotReq) (*GetRobotRsp, error)
+	// 获取AI详情
+	GetRobotDetail(context.Context, *GetRobotDetailReq) (*GetRobotDetailRsp, error)
 	// 新建AI
 	NewRobot(context.Context, *NewRobotReq) (*NewRobotRsp, error)
 	// 编辑AI
@@ -171,6 +184,9 @@ func (UnimplementedRobotSvrServer) GetTagList(context.Context, *GetTagListReq) (
 }
 func (UnimplementedRobotSvrServer) GetRobot(context.Context, *GetRobotReq) (*GetRobotRsp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetRobot not implemented")
+}
+func (UnimplementedRobotSvrServer) GetRobotDetail(context.Context, *GetRobotDetailReq) (*GetRobotDetailRsp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetRobotDetail not implemented")
 }
 func (UnimplementedRobotSvrServer) NewRobot(context.Context, *NewRobotReq) (*NewRobotRsp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method NewRobot not implemented")
@@ -268,6 +284,24 @@ func _RobotSvr_GetRobot_Handler(srv interface{}, ctx context.Context, dec func(i
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(RobotSvrServer).GetRobot(ctx, req.(*GetRobotReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RobotSvr_GetRobotDetail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetRobotDetailReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RobotSvrServer).GetRobotDetail(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/turingera.server.robot.RobotSvr/GetRobotDetail",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RobotSvrServer).GetRobotDetail(ctx, req.(*GetRobotDetailReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -384,6 +418,10 @@ var RobotSvr_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetRobot",
 			Handler:    _RobotSvr_GetRobot_Handler,
+		},
+		{
+			MethodName: "GetRobotDetail",
+			Handler:    _RobotSvr_GetRobotDetail_Handler,
 		},
 		{
 			MethodName: "NewRobot",
