@@ -16,8 +16,9 @@ message LoginReq {
 }
 
 message LoginRsp {
-  string token = 1;
-  int32 expire = 2;
+  string user_id = 1;
+  string token = 2;
+  int32 expire = 3;
 }
 
 service Auth {
