@@ -13,7 +13,7 @@ message UserInfo {
 }
 
 message InitUserReq {
-  UserInfo user = 1;
+  UserInfo init_info = 1;
 }
 
 message InitUserRsp {
