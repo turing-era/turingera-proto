@@ -1,4 +1,4 @@
-module github.com/turing-era/turingera-proto/pb
+module github.com/turing-era/turingera-proto/go
 
 go 1.16
 
