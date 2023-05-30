@@ -130,12 +130,12 @@ message RecommendRobotsRsp {
   repeated Robot robots = 1;
 }
 
-message RandomRobotReq {
+message RandomRobotIDReq {
 
 }
 
-message RandomRobotRsp {
-  Robot robot = 1;
+message RandomRobotIDRsp {
+  string robot_id = 1;
 }
 
 service RobotSvr {
@@ -159,6 +159,6 @@ service RobotSvr {
   rpc GetRobots (GetRobotsReq) returns (GetRobotsRsp);
   // 推荐AI列表
   rpc RecommendRobots (RecommendRobotsReq) returns (RecommendRobotsRsp);
-  // 随机机器人
-  rpc RandomRobot (RandomRobotReq) returns (RandomRobotRsp);
+  // 随机AI
+  rpc RandomRobotID (RandomRobotIDReq) returns (RandomRobotIDRsp);
 }
