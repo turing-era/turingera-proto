@@ -26,6 +26,8 @@ type UserinfoClient interface {
 	InitUser(ctx context.Context, in *InitUserReq, opts ...grpc.CallOption) (*InitUserRsp, error)
 	// 获取用户信息
 	GetUserInfo(ctx context.Context, in *GetUserInfoReq, opts ...grpc.CallOption) (*GetUserInfoRsp, error)
+	// 添加分数
+	AddScore(ctx context.Context, in *AddScoreReq, opts ...grpc.CallOption) (*AddScoreRsp, error)
 }
 
 type userinfoClient struct {
@@ -54,6 +56,15 @@ func (c *userinfoClient) GetUserInfo(ctx context.Context, in *GetUserInfoReq, op
 	return out, nil
 }
 
+func (c *userinfoClient) AddScore(ctx context.Context, in *AddScoreReq, opts ...grpc.CallOption) (*AddScoreRsp, error) {
+	out := new(AddScoreRsp)
+	err := c.cc.Invoke(ctx, "/turingera.server.userinfo.Userinfo/AddScore", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // UserinfoServer is the server API for Userinfo service.
 // All implementations must embed UnimplementedUserinfoServer
 // for forward compatibility
@@ -62,6 +73,8 @@ type UserinfoServer interface {
 	InitUser(context.Context, *InitUserReq) (*InitUserRsp, error)
 	// 获取用户信息
 	GetUserInfo(context.Context, *GetUserInfoReq) (*GetUserInfoRsp, error)
+	// 添加分数
+	AddScore(context.Context, *AddScoreReq) (*AddScoreRsp, error)
 	mustEmbedUnimplementedUserinfoServer()
 }
 
@@ -74,6 +87,9 @@ func (UnimplementedUserinfoServer) InitUser(context.Context, *InitUserReq) (*Ini
 }
 func (UnimplementedUserinfoServer) GetUserInfo(context.Context, *GetUserInfoReq) (*GetUserInfoRsp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUserInfo not implemented")
+}
+func (UnimplementedUserinfoServer) AddScore(context.Context, *AddScoreReq) (*AddScoreRsp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddScore not implemented")
 }
 func (UnimplementedUserinfoServer) mustEmbedUnimplementedUserinfoServer() {}
 
@@ -124,6 +140,24 @@ func _Userinfo_GetUserInfo_Handler(srv interface{}, ctx context.Context, dec fun
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Userinfo_AddScore_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddScoreReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserinfoServer).AddScore(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/turingera.server.userinfo.Userinfo/AddScore",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserinfoServer).AddScore(ctx, req.(*AddScoreReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Userinfo_ServiceDesc is the grpc.ServiceDesc for Userinfo service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -138,6 +172,10 @@ var Userinfo_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetUserInfo",
 			Handler:    _Userinfo_GetUserInfo_Handler,
+		},
+		{
+			MethodName: "AddScore",
+			Handler:    _Userinfo_AddScore_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

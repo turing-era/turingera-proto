@@ -10,6 +10,7 @@ message UserInfo {
   string platform_uid = 5;
   string email = 6;
   int64 register_time = 7;
+  int32 score = 8;
 }
 
 message InitUserReq {
@@ -28,9 +29,19 @@ message GetUserInfoRsp {
   UserInfo user = 1;
 }
 
+message AddScoreReq {
+  string user_id = 1;
+  int32 score = 2;
+}
+
+message AddScoreRsp {
+}
+
 service Userinfo {
   // 初始化用户
   rpc InitUser(InitUserReq) returns (InitUserRsp);
   // 获取用户信息
   rpc GetUserInfo(GetUserInfoReq) returns (GetUserInfoRsp);
+  // 添加分数
+  rpc AddScore (AddScoreReq) returns (AddScoreRsp);
 }
