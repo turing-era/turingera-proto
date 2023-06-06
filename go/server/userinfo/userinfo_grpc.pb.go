@@ -26,8 +26,8 @@ type UserinfoClient interface {
 	InitUser(ctx context.Context, in *InitUserReq, opts ...grpc.CallOption) (*InitUserRsp, error)
 	// 获取用户信息
 	GetUserInfo(ctx context.Context, in *GetUserInfoReq, opts ...grpc.CallOption) (*GetUserInfoRsp, error)
-	// 添加分数
-	AddScore(ctx context.Context, in *AddScoreReq, opts ...grpc.CallOption) (*AddScoreRsp, error)
+	// 更新动态数据
+	UpdateDynamic(ctx context.Context, in *UpdateDynamicReq, opts ...grpc.CallOption) (*UpdateDynamicRsp, error)
 }
 
 type userinfoClient struct {
@@ -56,9 +56,9 @@ func (c *userinfoClient) GetUserInfo(ctx context.Context, in *GetUserInfoReq, op
 	return out, nil
 }
 
-func (c *userinfoClient) AddScore(ctx context.Context, in *AddScoreReq, opts ...grpc.CallOption) (*AddScoreRsp, error) {
-	out := new(AddScoreRsp)
-	err := c.cc.Invoke(ctx, "/turingera.server.userinfo.Userinfo/AddScore", in, out, opts...)
+func (c *userinfoClient) UpdateDynamic(ctx context.Context, in *UpdateDynamicReq, opts ...grpc.CallOption) (*UpdateDynamicRsp, error) {
+	out := new(UpdateDynamicRsp)
+	err := c.cc.Invoke(ctx, "/turingera.server.userinfo.Userinfo/UpdateDynamic", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -73,8 +73,8 @@ type UserinfoServer interface {
 	InitUser(context.Context, *InitUserReq) (*InitUserRsp, error)
 	// 获取用户信息
 	GetUserInfo(context.Context, *GetUserInfoReq) (*GetUserInfoRsp, error)
-	// 添加分数
-	AddScore(context.Context, *AddScoreReq) (*AddScoreRsp, error)
+	// 更新动态数据
+	UpdateDynamic(context.Context, *UpdateDynamicReq) (*UpdateDynamicRsp, error)
 	mustEmbedUnimplementedUserinfoServer()
 }
 
@@ -88,8 +88,8 @@ func (UnimplementedUserinfoServer) InitUser(context.Context, *InitUserReq) (*Ini
 func (UnimplementedUserinfoServer) GetUserInfo(context.Context, *GetUserInfoReq) (*GetUserInfoRsp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUserInfo not implemented")
 }
-func (UnimplementedUserinfoServer) AddScore(context.Context, *AddScoreReq) (*AddScoreRsp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method AddScore not implemented")
+func (UnimplementedUserinfoServer) UpdateDynamic(context.Context, *UpdateDynamicReq) (*UpdateDynamicRsp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateDynamic not implemented")
 }
 func (UnimplementedUserinfoServer) mustEmbedUnimplementedUserinfoServer() {}
 
@@ -140,20 +140,20 @@ func _Userinfo_GetUserInfo_Handler(srv interface{}, ctx context.Context, dec fun
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Userinfo_AddScore_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AddScoreReq)
+func _Userinfo_UpdateDynamic_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateDynamicReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(UserinfoServer).AddScore(ctx, in)
+		return srv.(UserinfoServer).UpdateDynamic(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/turingera.server.userinfo.Userinfo/AddScore",
+		FullMethod: "/turingera.server.userinfo.Userinfo/UpdateDynamic",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserinfoServer).AddScore(ctx, req.(*AddScoreReq))
+		return srv.(UserinfoServer).UpdateDynamic(ctx, req.(*UpdateDynamicReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -174,8 +174,8 @@ var Userinfo_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Userinfo_GetUserInfo_Handler,
 		},
 		{
-			MethodName: "AddScore",
-			Handler:    _Userinfo_AddScore_Handler,
+			MethodName: "UpdateDynamic",
+			Handler:    _Userinfo_UpdateDynamic_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

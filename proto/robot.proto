@@ -59,7 +59,13 @@ message Robot {
   string identity_id = 8; // 身份
   string tag_id = 9; // 标签，多个时逗号分隔
   int64 create_time = 20;
-  int32 score = 50; // 积分
+  RobotDynamic dynamic = 100;
+}
+
+message RobotDynamic {
+  int32 score = 1; // 积分
+  uint32 chat_total = 2; // 总对话数
+  uint32 chat_win = 3; // 胜利数
 }
 
 message RobotDetail {
@@ -139,12 +145,12 @@ message RandomRobotIDRsp {
   string robot_id = 1;
 }
 
-message AddScoreReq {
-  string robot_id = 1;
-  int32 score = 2;
+message UpdateDynamicReq {
+  string user_id = 1;
+  RobotDynamic dynamic = 2;
 }
 
-message AddScoreRsp {
+message UpdateDynamicRsp {
 }
 
 service RobotSvr {
@@ -170,6 +176,6 @@ service RobotSvr {
   rpc RecommendRobots (RecommendRobotsReq) returns (RecommendRobotsRsp);
   // 随机AI
   rpc RandomRobotID (RandomRobotIDReq) returns (RandomRobotIDRsp);
-  // 添加分数
-  rpc AddScore (AddScoreReq) returns (AddScoreRsp);
+  // 更新动态数据
+  rpc UpdateDynamic (UpdateDynamicReq) returns (UpdateDynamicRsp);
 }
