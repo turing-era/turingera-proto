@@ -44,6 +44,8 @@ type RobotSvrClient interface {
 	RecommendRobots(ctx context.Context, in *RecommendRobotsReq, opts ...grpc.CallOption) (*RecommendRobotsRsp, error)
 	// 随机AI
 	RandomRobotID(ctx context.Context, in *RandomRobotIDReq, opts ...grpc.CallOption) (*RandomRobotIDRsp, error)
+	// 添加分数
+	AddScore(ctx context.Context, in *AddScoreReq, opts ...grpc.CallOption) (*AddScoreRsp, error)
 }
 
 type robotSvrClient struct {
@@ -153,6 +155,15 @@ func (c *robotSvrClient) RandomRobotID(ctx context.Context, in *RandomRobotIDReq
 	return out, nil
 }
 
+func (c *robotSvrClient) AddScore(ctx context.Context, in *AddScoreReq, opts ...grpc.CallOption) (*AddScoreRsp, error) {
+	out := new(AddScoreRsp)
+	err := c.cc.Invoke(ctx, "/turingera.server.robot.RobotSvr/AddScore", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // RobotSvrServer is the server API for RobotSvr service.
 // All implementations must embed UnimplementedRobotSvrServer
 // for forward compatibility
@@ -179,6 +190,8 @@ type RobotSvrServer interface {
 	RecommendRobots(context.Context, *RecommendRobotsReq) (*RecommendRobotsRsp, error)
 	// 随机AI
 	RandomRobotID(context.Context, *RandomRobotIDReq) (*RandomRobotIDRsp, error)
+	// 添加分数
+	AddScore(context.Context, *AddScoreReq) (*AddScoreRsp, error)
 	mustEmbedUnimplementedRobotSvrServer()
 }
 
@@ -218,6 +231,9 @@ func (UnimplementedRobotSvrServer) RecommendRobots(context.Context, *RecommendRo
 }
 func (UnimplementedRobotSvrServer) RandomRobotID(context.Context, *RandomRobotIDReq) (*RandomRobotIDRsp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RandomRobotID not implemented")
+}
+func (UnimplementedRobotSvrServer) AddScore(context.Context, *AddScoreReq) (*AddScoreRsp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddScore not implemented")
 }
 func (UnimplementedRobotSvrServer) mustEmbedUnimplementedRobotSvrServer() {}
 
@@ -430,6 +446,24 @@ func _RobotSvr_RandomRobotID_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
+func _RobotSvr_AddScore_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddScoreReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RobotSvrServer).AddScore(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/turingera.server.robot.RobotSvr/AddScore",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RobotSvrServer).AddScore(ctx, req.(*AddScoreReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // RobotSvr_ServiceDesc is the grpc.ServiceDesc for RobotSvr service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -480,6 +514,10 @@ var RobotSvr_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "RandomRobotID",
 			Handler:    _RobotSvr_RandomRobotID_Handler,
+		},
+		{
+			MethodName: "AddScore",
+			Handler:    _RobotSvr_AddScore_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

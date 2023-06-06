@@ -59,6 +59,7 @@ message Robot {
   string identity_id = 8; // 身份
   string tag_id = 9; // 标签，多个时逗号分隔
   int64 create_time = 20;
+  int32 score = 50; // 积分
 }
 
 message RobotDetail {
@@ -138,6 +139,14 @@ message RandomRobotIDRsp {
   string robot_id = 1;
 }
 
+message AddScoreReq {
+  string robot_id = 1;
+  int32 score = 2;
+}
+
+message AddScoreRsp {
+}
+
 service RobotSvr {
   // 获取性别列表
   rpc GetGenderList (GetGenderListReq) returns (GetGenderListRsp);
@@ -161,4 +170,6 @@ service RobotSvr {
   rpc RecommendRobots (RecommendRobotsReq) returns (RecommendRobotsRsp);
   // 随机AI
   rpc RandomRobotID (RandomRobotIDReq) returns (RandomRobotIDRsp);
+  // 添加分数
+  rpc AddScore (AddScoreReq) returns (AddScoreRsp);
 }
