@@ -64,7 +64,7 @@ message Robot {
 
 message RobotDynamic {
   int32 score = 1; // 积分
-  uint32 game_total = 2; // 总对话数
+  uint32 game_total = 2; // 总场数
   uint32 game_win = 3; // 胜利数
 }
 
