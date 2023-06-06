@@ -20,6 +20,7 @@ message NonceRsp {
 message LoginReq {
   string access_token = 1;
   string secret = 2;
+  string signature = 3;
   uint32 login_type = 10;
 }
 
