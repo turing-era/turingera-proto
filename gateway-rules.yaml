@@ -4,6 +4,10 @@ config_version: 3
 http:
   rules:
     #----- auth 鉴权服务 ----- #
+    # 生成nonce
+    - selector: turingera.server.auth.Auth.Nonce
+      post: /auth/Nonce
+      body: "*"
     # 登录
     - selector: turingera.server.auth.Auth.Login
       post: /auth/Login

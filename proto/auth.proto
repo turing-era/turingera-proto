@@ -9,6 +9,14 @@ enum LoginType {
   LOGIN_TYPE_WALLET = 3; // 钱包
 }
 
+message NonceReq {
+
+}
+
+message NonceRsp {
+  string nonce = 1;
+}
+
 message LoginReq {
   string access_token = 1;
   string secret = 2;
@@ -22,6 +30,8 @@ message LoginRsp {
 }
 
 service Auth {
+  // 生成nonce
+  rpc Nonce(NonceReq) returns (NonceRsp);
   // 登录
   rpc Login(LoginReq) returns (LoginRsp);
 }
