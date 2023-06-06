@@ -68,6 +68,7 @@ message GuessReq {
 message GuessRsp {
   uint32 partner_type = 1; // UserType
   bool correct = 2;
+  int32 score = 3;
 }
 
 service ChatSvr {
