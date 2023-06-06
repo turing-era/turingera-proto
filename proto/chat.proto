@@ -27,6 +27,7 @@ message Info {
 
   bool guessed = 50;
   bool correct = 51;
+  int32 score = 52;
 }
 
 message NewChatReq {

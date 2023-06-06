@@ -638,7 +638,7 @@ type RobotDynamic struct {
 	unknownFields protoimpl.UnknownFields
 
 	Score     int32  `protobuf:"varint,1,opt,name=score,proto3" json:"score,omitempty"`                          // 积分
-	GameTotal uint32 `protobuf:"varint,2,opt,name=game_total,json=gameTotal,proto3" json:"game_total,omitempty"` // 总对话数
+	GameTotal uint32 `protobuf:"varint,2,opt,name=game_total,json=gameTotal,proto3" json:"game_total,omitempty"` // 总场数
 	GameWin   uint32 `protobuf:"varint,3,opt,name=game_win,json=gameWin,proto3" json:"game_win,omitempty"`       // 胜利数
 }
 
