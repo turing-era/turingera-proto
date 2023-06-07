@@ -72,8 +72,8 @@ message RobotDynamic {
 message RobotDetail {
   string robot_id = 1;
   Gender gender = 2;
-  repeated Identity identity_list = 3;
-  repeated Tag tag_list = 4;
+  Identity identity_info = 3; // 身份信息
+  repeated Tag tag_info = 4; // 标签信息
 }
 
 message GetRobotReq {
