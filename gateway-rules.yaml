@@ -71,8 +71,8 @@ http:
       post: /robot/DeleteRobot
       body: "*"
     # 获取我的AI列表
-    - selector: turingera.server.robot.RobotSvr.GetRobots
-      post: /robot/GetRobots
+    - selector: turingera.server.robot.RobotSvr.GetMyRobots
+      post: /robot/GetMyRobots
       body: "*"
     # 推荐AI列表
     - selector: turingera.server.robot.RobotSvr.RecommendRobots

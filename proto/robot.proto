@@ -6,7 +6,6 @@ message Identity {
   string identity_id = 1;
   string name = 2;
   string desc = 3;
-  string idea = 4;
 }
 
 message Tag {
@@ -57,7 +56,9 @@ message Robot {
   uint32 gender = 6;
   string location = 7;
   string identity_id = 8; // 身份
-  string tag_id = 9; // 标签，多个时逗号分隔
+  repeated string tag_id = 9; // 标签
+  Identity custom_identity = 10; // 自定义身份
+  repeated Tag custom_tag = 11; // 自定义标签
   int64 create_time = 20;
   RobotDynamic dynamic = 100;
 }
@@ -93,13 +94,7 @@ message GetRobotDetailRsp {
 }
 
 message NewRobotReq {
-  string name = 1;
-  string avatar = 2;
-  uint32 age = 3;
-  uint32 gender = 4;
-  string location = 5;
-  string identity_id = 6; // 身份
-  string tag_id = 7; // 标签，多个时逗号分隔
+  Robot robot = 1;
 }
 
 message NewRobotRsp {
@@ -122,10 +117,10 @@ message DeleteRobotRsp {
 
 }
 
-message GetRobotsReq {
+message GetMyRobotsReq {
 }
 
-message GetRobotsRsp {
+message GetMyRobotsRsp {
   repeated Robot robots = 1;
 }
 
@@ -171,7 +166,7 @@ service RobotSvr {
   // 删除AI
   rpc DeleteRobot(DeleteRobotReq) returns (DeleteRobotRsp);
   // 获取我的AI列表
-  rpc GetRobots (GetRobotsReq) returns (GetRobotsRsp);
+  rpc GetMyRobots (GetMyRobotsReq) returns (GetMyRobotsRsp);
   // 推荐AI列表
   rpc RecommendRobots (RecommendRobotsReq) returns (RecommendRobotsRsp);
   // 随机AI
