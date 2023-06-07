@@ -56,7 +56,7 @@ message Robot {
   uint32 gender = 6;
   string location = 7;
   string identity_id = 8; // 身份
-  repeated string tag_id = 9; // 标签
+  string tag_id = 9; // 标签, 逗号分隔
   Identity custom_identity = 10; // 自定义身份
   repeated Tag custom_tag = 11; // 自定义标签
   int64 create_time = 20;
