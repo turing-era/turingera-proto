@@ -1,0 +1,53 @@
+syntax = "proto3";
+package turingera.server.knowledge;
+option go_package = "github.com/turing-era/turingera-proto/go/server/knowledge";
+
+message KnowledgeInfo  {
+  uint32 k_id = 1;
+  string user_id = 2;
+  string robot_id = 3;
+  string text = 4;
+}
+
+message GetKnowledgeListReq {
+}
+
+message GetKnowledgeListRsp {
+  repeated KnowledgeInfo infos = 1;
+}
+
+message SaveKnowledgeReq {
+  KnowledgeInfo info = 1;
+}
+
+message SaveKnowledgeRsp {
+  KnowledgeInfo info = 1;
+}
+
+message RemKnowledgeReq {
+  string robot_id = 1;
+  uint32 k_id = 2;
+}
+
+message RemKnowledgeRsp {
+
+}
+
+message LoadKnowledgeReq {
+  string robot_id = 1;
+}
+
+message LoadKnowledgeRsp {
+
+}
+
+service KnowledgeSvr {
+  // 获取知识列表
+  rpc GetKnowledgeList (GetKnowledgeListReq) returns (GetKnowledgeListRsp);
+  // 保存知识资料
+  rpc SaveKnowledge (SaveKnowledgeReq) returns (SaveKnowledgeRsp);
+  // 删除知识资料
+  rpc RemKnowledge (RemKnowledgeReq) returns (RemKnowledgeRsp);
+  // 加载知识资料
+  rpc LoadKnowledge (LoadKnowledgeReq) returns (LoadKnowledgeRsp);
+}
