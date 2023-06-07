@@ -46,6 +46,8 @@ type RobotSvrClient interface {
 	RandomRobotID(ctx context.Context, in *RandomRobotIDReq, opts ...grpc.CallOption) (*RandomRobotIDRsp, error)
 	// 更新动态数据
 	UpdateDynamic(ctx context.Context, in *UpdateDynamicReq, opts ...grpc.CallOption) (*UpdateDynamicRsp, error)
+	// 更新是否使用知识库
+	UpdateUseKnowledge(ctx context.Context, in *UpdateUseKnowledgeReq, opts ...grpc.CallOption) (*UpdateUseKnowledgeRsp, error)
 }
 
 type robotSvrClient struct {
@@ -164,6 +166,15 @@ func (c *robotSvrClient) UpdateDynamic(ctx context.Context, in *UpdateDynamicReq
 	return out, nil
 }
 
+func (c *robotSvrClient) UpdateUseKnowledge(ctx context.Context, in *UpdateUseKnowledgeReq, opts ...grpc.CallOption) (*UpdateUseKnowledgeRsp, error) {
+	out := new(UpdateUseKnowledgeRsp)
+	err := c.cc.Invoke(ctx, "/turingera.server.robot.RobotSvr/UpdateUseKnowledge", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // RobotSvrServer is the server API for RobotSvr service.
 // All implementations must embed UnimplementedRobotSvrServer
 // for forward compatibility
@@ -192,6 +203,8 @@ type RobotSvrServer interface {
 	RandomRobotID(context.Context, *RandomRobotIDReq) (*RandomRobotIDRsp, error)
 	// 更新动态数据
 	UpdateDynamic(context.Context, *UpdateDynamicReq) (*UpdateDynamicRsp, error)
+	// 更新是否使用知识库
+	UpdateUseKnowledge(context.Context, *UpdateUseKnowledgeReq) (*UpdateUseKnowledgeRsp, error)
 	mustEmbedUnimplementedRobotSvrServer()
 }
 
@@ -234,6 +247,9 @@ func (UnimplementedRobotSvrServer) RandomRobotID(context.Context, *RandomRobotID
 }
 func (UnimplementedRobotSvrServer) UpdateDynamic(context.Context, *UpdateDynamicReq) (*UpdateDynamicRsp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateDynamic not implemented")
+}
+func (UnimplementedRobotSvrServer) UpdateUseKnowledge(context.Context, *UpdateUseKnowledgeReq) (*UpdateUseKnowledgeRsp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateUseKnowledge not implemented")
 }
 func (UnimplementedRobotSvrServer) mustEmbedUnimplementedRobotSvrServer() {}
 
@@ -464,6 +480,24 @@ func _RobotSvr_UpdateDynamic_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
+func _RobotSvr_UpdateUseKnowledge_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateUseKnowledgeReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RobotSvrServer).UpdateUseKnowledge(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/turingera.server.robot.RobotSvr/UpdateUseKnowledge",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RobotSvrServer).UpdateUseKnowledge(ctx, req.(*UpdateUseKnowledgeReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // RobotSvr_ServiceDesc is the grpc.ServiceDesc for RobotSvr service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -518,6 +552,10 @@ var RobotSvr_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateDynamic",
 			Handler:    _RobotSvr_UpdateDynamic_Handler,
+		},
+		{
+			MethodName: "UpdateUseKnowledge",
+			Handler:    _RobotSvr_UpdateUseKnowledge_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

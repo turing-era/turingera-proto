@@ -74,6 +74,7 @@ message RobotDetail {
   Gender gender = 2;
   Identity identity_info = 3; // 身份信息
   repeated Tag tag_info = 4; // 标签信息
+  bool use_knowledge = 5; // 是否使用知识库
 }
 
 message GetRobotReq {
@@ -148,6 +149,15 @@ message UpdateDynamicReq {
 message UpdateDynamicRsp {
 }
 
+message UpdateUseKnowledgeReq {
+  string robot_id = 1;
+  bool use_knowledge = 2;
+}
+
+message UpdateUseKnowledgeRsp {
+
+}
+
 service RobotSvr {
   // 获取性别列表
   rpc GetGenderList (GetGenderListReq) returns (GetGenderListRsp);
@@ -173,4 +183,6 @@ service RobotSvr {
   rpc RandomRobotID (RandomRobotIDReq) returns (RandomRobotIDRsp);
   // 更新动态数据
   rpc UpdateDynamic (UpdateDynamicReq) returns (UpdateDynamicRsp);
+  // 更新是否使用知识库
+  rpc UpdateUseKnowledge (UpdateUseKnowledgeReq) returns (UpdateUseKnowledgeRsp);
 }
