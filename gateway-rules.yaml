@@ -96,7 +96,3 @@ http:
     - selector: turingera.server.knowledge.KnowledgeSvr.LoadKnowledge
       post: /knowledge/LoadKnowledge
       body: "*"
-    # 搜索知识库
-    - selector: turingera.server.knowledge.KnowledgeSvr.SearchKnowledge
-      post: /knowledge/SearchKnowledge
-      body: "*"
