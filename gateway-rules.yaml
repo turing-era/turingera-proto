@@ -92,7 +92,11 @@ http:
     - selector: turingera.server.knowledge.KnowledgeSvr.RemKnowledge
       post: /knowledge/RemKnowledge
       body: "*"
-    # 加载知识资料
+    # 加载知识库
     - selector: turingera.server.knowledge.KnowledgeSvr.LoadKnowledge
       post: /knowledge/LoadKnowledge
+      body: "*"
+    # 搜索知识库
+    - selector: turingera.server.knowledge.KnowledgeSvr.SearchKnowledge
+      post: /knowledge/SearchKnowledge
       body: "*"
