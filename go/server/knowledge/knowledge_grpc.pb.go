@@ -28,8 +28,10 @@ type KnowledgeSvrClient interface {
 	SaveKnowledge(ctx context.Context, in *SaveKnowledgeReq, opts ...grpc.CallOption) (*SaveKnowledgeRsp, error)
 	// 删除知识资料
 	RemKnowledge(ctx context.Context, in *RemKnowledgeReq, opts ...grpc.CallOption) (*RemKnowledgeRsp, error)
-	// 加载知识资料
+	// 加载知识库
 	LoadKnowledge(ctx context.Context, in *LoadKnowledgeReq, opts ...grpc.CallOption) (*LoadKnowledgeRsp, error)
+	// 搜索知识库
+	SearchKnowledge(ctx context.Context, in *SearchKnowledgeReq, opts ...grpc.CallOption) (*SearchKnowledgeRsp, error)
 }
 
 type knowledgeSvrClient struct {
@@ -76,6 +78,15 @@ func (c *knowledgeSvrClient) LoadKnowledge(ctx context.Context, in *LoadKnowledg
 	return out, nil
 }
 
+func (c *knowledgeSvrClient) SearchKnowledge(ctx context.Context, in *SearchKnowledgeReq, opts ...grpc.CallOption) (*SearchKnowledgeRsp, error) {
+	out := new(SearchKnowledgeRsp)
+	err := c.cc.Invoke(ctx, "/turingera.server.knowledge.KnowledgeSvr/SearchKnowledge", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // KnowledgeSvrServer is the server API for KnowledgeSvr service.
 // All implementations must embed UnimplementedKnowledgeSvrServer
 // for forward compatibility
@@ -86,8 +97,10 @@ type KnowledgeSvrServer interface {
 	SaveKnowledge(context.Context, *SaveKnowledgeReq) (*SaveKnowledgeRsp, error)
 	// 删除知识资料
 	RemKnowledge(context.Context, *RemKnowledgeReq) (*RemKnowledgeRsp, error)
-	// 加载知识资料
+	// 加载知识库
 	LoadKnowledge(context.Context, *LoadKnowledgeReq) (*LoadKnowledgeRsp, error)
+	// 搜索知识库
+	SearchKnowledge(context.Context, *SearchKnowledgeReq) (*SearchKnowledgeRsp, error)
 	mustEmbedUnimplementedKnowledgeSvrServer()
 }
 
@@ -106,6 +119,9 @@ func (UnimplementedKnowledgeSvrServer) RemKnowledge(context.Context, *RemKnowled
 }
 func (UnimplementedKnowledgeSvrServer) LoadKnowledge(context.Context, *LoadKnowledgeReq) (*LoadKnowledgeRsp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method LoadKnowledge not implemented")
+}
+func (UnimplementedKnowledgeSvrServer) SearchKnowledge(context.Context, *SearchKnowledgeReq) (*SearchKnowledgeRsp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SearchKnowledge not implemented")
 }
 func (UnimplementedKnowledgeSvrServer) mustEmbedUnimplementedKnowledgeSvrServer() {}
 
@@ -192,6 +208,24 @@ func _KnowledgeSvr_LoadKnowledge_Handler(srv interface{}, ctx context.Context, d
 	return interceptor(ctx, in, info, handler)
 }
 
+func _KnowledgeSvr_SearchKnowledge_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SearchKnowledgeReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(KnowledgeSvrServer).SearchKnowledge(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/turingera.server.knowledge.KnowledgeSvr/SearchKnowledge",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(KnowledgeSvrServer).SearchKnowledge(ctx, req.(*SearchKnowledgeReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // KnowledgeSvr_ServiceDesc is the grpc.ServiceDesc for KnowledgeSvr service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -214,6 +248,10 @@ var KnowledgeSvr_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "LoadKnowledge",
 			Handler:    _KnowledgeSvr_LoadKnowledge_Handler,
+		},
+		{
+			MethodName: "SearchKnowledge",
+			Handler:    _KnowledgeSvr_SearchKnowledge_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
