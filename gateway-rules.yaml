@@ -82,17 +82,17 @@ http:
     #----- knowledge 知识库服务 ----- #
     # 获取知识列表
     - selector: turingera.server.knowledge.KnowledgeSvr.GetKnowledgeList
-      post: /robot/GetKnowledgeList
+      post: /knowledge/GetKnowledgeList
       body: "*"
     # 保存知识资料
     - selector: turingera.server.knowledge.KnowledgeSvr.SaveKnowledge
-      post: /robot/SaveKnowledge
+      post: /knowledge/SaveKnowledge
       body: "*"
     # 删除知识资料
     - selector: turingera.server.knowledge.KnowledgeSvr.RemKnowledge
-      post: /robot/RemKnowledge
+      post: /knowledge/RemKnowledge
       body: "*"
     # 加载知识资料
     - selector: turingera.server.knowledge.KnowledgeSvr.LoadKnowledge
-      post: /robot/LoadKnowledge
+      post: /knowledge/LoadKnowledge
       body: "*"

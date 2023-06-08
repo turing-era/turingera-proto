@@ -181,7 +181,7 @@ func RegisterKnowledgeSvrHandlerServer(ctx context.Context, mux *runtime.ServeMu
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/turingera.server.knowledge.KnowledgeSvr/GetKnowledgeList", runtime.WithHTTPPathPattern("/robot/GetKnowledgeList"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/turingera.server.knowledge.KnowledgeSvr/GetKnowledgeList", runtime.WithHTTPPathPattern("/knowledge/GetKnowledgeList"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -206,7 +206,7 @@ func RegisterKnowledgeSvrHandlerServer(ctx context.Context, mux *runtime.ServeMu
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/turingera.server.knowledge.KnowledgeSvr/SaveKnowledge", runtime.WithHTTPPathPattern("/robot/SaveKnowledge"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/turingera.server.knowledge.KnowledgeSvr/SaveKnowledge", runtime.WithHTTPPathPattern("/knowledge/SaveKnowledge"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -231,7 +231,7 @@ func RegisterKnowledgeSvrHandlerServer(ctx context.Context, mux *runtime.ServeMu
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/turingera.server.knowledge.KnowledgeSvr/RemKnowledge", runtime.WithHTTPPathPattern("/robot/RemKnowledge"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/turingera.server.knowledge.KnowledgeSvr/RemKnowledge", runtime.WithHTTPPathPattern("/knowledge/RemKnowledge"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -256,7 +256,7 @@ func RegisterKnowledgeSvrHandlerServer(ctx context.Context, mux *runtime.ServeMu
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/turingera.server.knowledge.KnowledgeSvr/LoadKnowledge", runtime.WithHTTPPathPattern("/robot/LoadKnowledge"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/turingera.server.knowledge.KnowledgeSvr/LoadKnowledge", runtime.WithHTTPPathPattern("/knowledge/LoadKnowledge"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -320,7 +320,7 @@ func RegisterKnowledgeSvrHandlerClient(ctx context.Context, mux *runtime.ServeMu
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/turingera.server.knowledge.KnowledgeSvr/GetKnowledgeList", runtime.WithHTTPPathPattern("/robot/GetKnowledgeList"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/turingera.server.knowledge.KnowledgeSvr/GetKnowledgeList", runtime.WithHTTPPathPattern("/knowledge/GetKnowledgeList"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -342,7 +342,7 @@ func RegisterKnowledgeSvrHandlerClient(ctx context.Context, mux *runtime.ServeMu
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/turingera.server.knowledge.KnowledgeSvr/SaveKnowledge", runtime.WithHTTPPathPattern("/robot/SaveKnowledge"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/turingera.server.knowledge.KnowledgeSvr/SaveKnowledge", runtime.WithHTTPPathPattern("/knowledge/SaveKnowledge"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -364,7 +364,7 @@ func RegisterKnowledgeSvrHandlerClient(ctx context.Context, mux *runtime.ServeMu
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/turingera.server.knowledge.KnowledgeSvr/RemKnowledge", runtime.WithHTTPPathPattern("/robot/RemKnowledge"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/turingera.server.knowledge.KnowledgeSvr/RemKnowledge", runtime.WithHTTPPathPattern("/knowledge/RemKnowledge"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -386,7 +386,7 @@ func RegisterKnowledgeSvrHandlerClient(ctx context.Context, mux *runtime.ServeMu
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/turingera.server.knowledge.KnowledgeSvr/LoadKnowledge", runtime.WithHTTPPathPattern("/robot/LoadKnowledge"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/turingera.server.knowledge.KnowledgeSvr/LoadKnowledge", runtime.WithHTTPPathPattern("/knowledge/LoadKnowledge"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -406,13 +406,13 @@ func RegisterKnowledgeSvrHandlerClient(ctx context.Context, mux *runtime.ServeMu
 }
 
 var (
-	pattern_KnowledgeSvr_GetKnowledgeList_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"robot", "GetKnowledgeList"}, ""))
+	pattern_KnowledgeSvr_GetKnowledgeList_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"knowledge", "GetKnowledgeList"}, ""))
 
-	pattern_KnowledgeSvr_SaveKnowledge_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"robot", "SaveKnowledge"}, ""))
+	pattern_KnowledgeSvr_SaveKnowledge_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"knowledge", "SaveKnowledge"}, ""))
 
-	pattern_KnowledgeSvr_RemKnowledge_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"robot", "RemKnowledge"}, ""))
+	pattern_KnowledgeSvr_RemKnowledge_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"knowledge", "RemKnowledge"}, ""))
 
-	pattern_KnowledgeSvr_LoadKnowledge_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"robot", "LoadKnowledge"}, ""))
+	pattern_KnowledgeSvr_LoadKnowledge_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"knowledge", "LoadKnowledge"}, ""))
 )
 
 var (
