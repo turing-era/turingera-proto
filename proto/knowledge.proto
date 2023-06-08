@@ -10,6 +10,7 @@ message KnowledgeInfo  {
 }
 
 message GetKnowledgeListReq {
+  string robot_id = 1;
 }
 
 message GetKnowledgeListRsp {
