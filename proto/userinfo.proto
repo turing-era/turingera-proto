@@ -21,10 +21,12 @@ message UserDynamic {
 
 message InitUserReq {
   UserInfo init_info = 1;
+  string early_access_code = 2;
 }
 
 message InitUserRsp {
   string user_id = 1;
+  string early_access_code = 2;
 }
 
 message GetUserInfoReq {
