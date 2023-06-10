@@ -28,6 +28,8 @@ type UserinfoClient interface {
 	GetUserInfo(ctx context.Context, in *GetUserInfoReq, opts ...grpc.CallOption) (*GetUserInfoRsp, error)
 	// 更新动态数据
 	UpdateDynamic(ctx context.Context, in *UpdateDynamicReq, opts ...grpc.CallOption) (*UpdateDynamicRsp, error)
+	// 更新access
+	UpdateEarlyAccess(ctx context.Context, in *UpdateEarlyAccessReq, opts ...grpc.CallOption) (*UpdateEarlyAccessRsp, error)
 }
 
 type userinfoClient struct {
@@ -65,6 +67,15 @@ func (c *userinfoClient) UpdateDynamic(ctx context.Context, in *UpdateDynamicReq
 	return out, nil
 }
 
+func (c *userinfoClient) UpdateEarlyAccess(ctx context.Context, in *UpdateEarlyAccessReq, opts ...grpc.CallOption) (*UpdateEarlyAccessRsp, error) {
+	out := new(UpdateEarlyAccessRsp)
+	err := c.cc.Invoke(ctx, "/turingera.server.userinfo.Userinfo/UpdateEarlyAccess", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // UserinfoServer is the server API for Userinfo service.
 // All implementations must embed UnimplementedUserinfoServer
 // for forward compatibility
@@ -75,6 +86,8 @@ type UserinfoServer interface {
 	GetUserInfo(context.Context, *GetUserInfoReq) (*GetUserInfoRsp, error)
 	// 更新动态数据
 	UpdateDynamic(context.Context, *UpdateDynamicReq) (*UpdateDynamicRsp, error)
+	// 更新access
+	UpdateEarlyAccess(context.Context, *UpdateEarlyAccessReq) (*UpdateEarlyAccessRsp, error)
 	mustEmbedUnimplementedUserinfoServer()
 }
 
@@ -90,6 +103,9 @@ func (UnimplementedUserinfoServer) GetUserInfo(context.Context, *GetUserInfoReq)
 }
 func (UnimplementedUserinfoServer) UpdateDynamic(context.Context, *UpdateDynamicReq) (*UpdateDynamicRsp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateDynamic not implemented")
+}
+func (UnimplementedUserinfoServer) UpdateEarlyAccess(context.Context, *UpdateEarlyAccessReq) (*UpdateEarlyAccessRsp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateEarlyAccess not implemented")
 }
 func (UnimplementedUserinfoServer) mustEmbedUnimplementedUserinfoServer() {}
 
@@ -158,6 +174,24 @@ func _Userinfo_UpdateDynamic_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Userinfo_UpdateEarlyAccess_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateEarlyAccessReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserinfoServer).UpdateEarlyAccess(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/turingera.server.userinfo.Userinfo/UpdateEarlyAccess",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserinfoServer).UpdateEarlyAccess(ctx, req.(*UpdateEarlyAccessReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Userinfo_ServiceDesc is the grpc.ServiceDesc for Userinfo service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -176,6 +210,10 @@ var Userinfo_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateDynamic",
 			Handler:    _Userinfo_UpdateDynamic_Handler,
+		},
+		{
+			MethodName: "UpdateEarlyAccess",
+			Handler:    _Userinfo_UpdateEarlyAccess_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

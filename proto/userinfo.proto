@@ -44,6 +44,15 @@ message UpdateDynamicReq {
 message UpdateDynamicRsp {
 }
 
+message UpdateEarlyAccessReq {
+  string user_id = 1;
+  string early_access_code = 2;
+}
+
+message UpdateEarlyAccessRsp {
+
+}
+
 service Userinfo {
   // 初始化用户
   rpc InitUser(InitUserReq) returns (InitUserRsp);
@@ -51,4 +60,6 @@ service Userinfo {
   rpc GetUserInfo(GetUserInfoReq) returns (GetUserInfoRsp);
   // 更新动态数据
   rpc UpdateDynamic (UpdateDynamicReq) returns (UpdateDynamicRsp);
+  // 更新access
+  rpc UpdateEarlyAccess (UpdateEarlyAccessReq) returns (UpdateEarlyAccessRsp);
 }
