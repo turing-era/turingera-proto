@@ -17,6 +17,11 @@ message NonceRsp {
   string nonce = 1;
 }
 
+message EarlyAccess {
+  string early_access_code = 1;
+  string user_id = 2;
+}
+
 message LoginReq {
   string access_token = 1;
   string secret = 2;
