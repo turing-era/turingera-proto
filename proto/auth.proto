@@ -26,6 +26,7 @@ message LoginReq {
   string signature = 11;
 
   uint32 login_type = 50;
+  string early_access_code = 51;
 }
 
 message LoginRsp {
