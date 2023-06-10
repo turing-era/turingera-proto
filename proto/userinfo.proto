@@ -10,6 +10,7 @@ message UserInfo {
   string platform_uid = 5;
   string email = 6;
   int64 register_time = 7;
+  string early_access_code = 8;
   UserDynamic dynamic = 100;
 }
 
@@ -21,7 +22,6 @@ message UserDynamic {
 
 message InitUserReq {
   UserInfo init_info = 1;
-  string early_access_code = 2;
 }
 
 message InitUserRsp {
