@@ -36,6 +36,10 @@ http:
     - selector: turingera.server.chat.ChatSvr.Guess
       post: /chat/Guess
       body: "*"
+    # 等待判断
+    - selector: turingera.server.chat.ChatSvr.WaitGuess
+      post: /chat/WaitGuess
+      body: "*"
 
     #----- robot 机器人服务 ----- #
     # 获取性别列表

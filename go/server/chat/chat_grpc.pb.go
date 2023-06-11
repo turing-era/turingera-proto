@@ -30,6 +30,8 @@ type ChatSvrClient interface {
 	SendMessage(ctx context.Context, in *SendMessageReq, opts ...grpc.CallOption) (*SendMessageRsp, error)
 	// 做出判断
 	Guess(ctx context.Context, in *GuessReq, opts ...grpc.CallOption) (*GuessRsp, error)
+	// 等待判断
+	WaitGuess(ctx context.Context, in *WaitGuessReq, opts ...grpc.CallOption) (*WaitGuessRsp, error)
 }
 
 type chatSvrClient struct {
@@ -76,6 +78,15 @@ func (c *chatSvrClient) Guess(ctx context.Context, in *GuessReq, opts ...grpc.Ca
 	return out, nil
 }
 
+func (c *chatSvrClient) WaitGuess(ctx context.Context, in *WaitGuessReq, opts ...grpc.CallOption) (*WaitGuessRsp, error) {
+	out := new(WaitGuessRsp)
+	err := c.cc.Invoke(ctx, "/turingera.server.chat.ChatSvr/WaitGuess", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ChatSvrServer is the server API for ChatSvr service.
 // All implementations must embed UnimplementedChatSvrServer
 // for forward compatibility
@@ -88,6 +99,8 @@ type ChatSvrServer interface {
 	SendMessage(context.Context, *SendMessageReq) (*SendMessageRsp, error)
 	// 做出判断
 	Guess(context.Context, *GuessReq) (*GuessRsp, error)
+	// 等待判断
+	WaitGuess(context.Context, *WaitGuessReq) (*WaitGuessRsp, error)
 	mustEmbedUnimplementedChatSvrServer()
 }
 
@@ -106,6 +119,9 @@ func (UnimplementedChatSvrServer) SendMessage(context.Context, *SendMessageReq) 
 }
 func (UnimplementedChatSvrServer) Guess(context.Context, *GuessReq) (*GuessRsp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Guess not implemented")
+}
+func (UnimplementedChatSvrServer) WaitGuess(context.Context, *WaitGuessReq) (*WaitGuessRsp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method WaitGuess not implemented")
 }
 func (UnimplementedChatSvrServer) mustEmbedUnimplementedChatSvrServer() {}
 
@@ -192,6 +208,24 @@ func _ChatSvr_Guess_Handler(srv interface{}, ctx context.Context, dec func(inter
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ChatSvr_WaitGuess_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(WaitGuessReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ChatSvrServer).WaitGuess(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/turingera.server.chat.ChatSvr/WaitGuess",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ChatSvrServer).WaitGuess(ctx, req.(*WaitGuessReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ChatSvr_ServiceDesc is the grpc.ServiceDesc for ChatSvr service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -214,6 +248,10 @@ var ChatSvr_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Guess",
 			Handler:    _ChatSvr_Guess_Handler,
+		},
+		{
+			MethodName: "WaitGuess",
+			Handler:    _ChatSvr_WaitGuess_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

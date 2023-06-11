@@ -71,6 +71,15 @@ message GuessRsp {
   int32 score = 3;
 }
 
+message WaitGuessReq {
+  string chat_id = 1;
+
+}
+
+message WaitGuessRsp {
+  Info info = 1;
+}
+
 service ChatSvr {
   // 新建对话
   rpc NewChat (NewChatReq) returns (NewChatRsp);
@@ -80,5 +89,7 @@ service ChatSvr {
   rpc SendMessage (SendMessageReq) returns (SendMessageRsp);
   // 做出判断
   rpc Guess (GuessReq) returns (GuessRsp);
+  // 等待判断
+  rpc WaitGuess (WaitGuessReq) returns (WaitGuessRsp);
 
 }
