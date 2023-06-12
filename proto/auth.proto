@@ -36,7 +36,8 @@ message LoginReq {
 
 enum LoginResFlag {
   LOGIN_SUCC = 0;
-  LOGIN_NEED_ACCESS_CODE = 1;
+  LOGIN_ACCESS_CODE_EMPTY = 1; // 需要填写邀请码
+  LOGIN_ACCESS_CODE_USED = 2; // 邀请码已被使用
 }
 
 message LoginRsp {
