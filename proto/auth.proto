@@ -34,10 +34,16 @@ message LoginReq {
   string early_access_code = 51;
 }
 
+enum LoginResFlag {
+  LOGIN_SUCC = 0;
+  LOGIN_NEED_ACCESS_CODE = 1;
+}
+
 message LoginRsp {
   string user_id = 1;
   string token = 2;
-  int32 expire = 3;
+  uint32 expire = 3;
+  uint32 res_flag = 4;
 }
 
 service Auth {
