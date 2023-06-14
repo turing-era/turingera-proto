@@ -26,6 +26,8 @@ type UserinfoClient interface {
 	InitUser(ctx context.Context, in *InitUserReq, opts ...grpc.CallOption) (*InitUserRsp, error)
 	// 获取用户信息
 	GetUserInfo(ctx context.Context, in *GetUserInfoReq, opts ...grpc.CallOption) (*GetUserInfoRsp, error)
+	// 批量用户信息
+	BatchGetUserInfo(ctx context.Context, in *BatchGetUserInfoReq, opts ...grpc.CallOption) (*BatchGetUserInfoRsp, error)
 	// 更新动态数据
 	UpdateDynamic(ctx context.Context, in *UpdateDynamicReq, opts ...grpc.CallOption) (*UpdateDynamicRsp, error)
 	// 更新access
@@ -58,6 +60,15 @@ func (c *userinfoClient) GetUserInfo(ctx context.Context, in *GetUserInfoReq, op
 	return out, nil
 }
 
+func (c *userinfoClient) BatchGetUserInfo(ctx context.Context, in *BatchGetUserInfoReq, opts ...grpc.CallOption) (*BatchGetUserInfoRsp, error) {
+	out := new(BatchGetUserInfoRsp)
+	err := c.cc.Invoke(ctx, "/turingera.server.userinfo.Userinfo/BatchGetUserInfo", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *userinfoClient) UpdateDynamic(ctx context.Context, in *UpdateDynamicReq, opts ...grpc.CallOption) (*UpdateDynamicRsp, error) {
 	out := new(UpdateDynamicRsp)
 	err := c.cc.Invoke(ctx, "/turingera.server.userinfo.Userinfo/UpdateDynamic", in, out, opts...)
@@ -84,6 +95,8 @@ type UserinfoServer interface {
 	InitUser(context.Context, *InitUserReq) (*InitUserRsp, error)
 	// 获取用户信息
 	GetUserInfo(context.Context, *GetUserInfoReq) (*GetUserInfoRsp, error)
+	// 批量用户信息
+	BatchGetUserInfo(context.Context, *BatchGetUserInfoReq) (*BatchGetUserInfoRsp, error)
 	// 更新动态数据
 	UpdateDynamic(context.Context, *UpdateDynamicReq) (*UpdateDynamicRsp, error)
 	// 更新access
@@ -100,6 +113,9 @@ func (UnimplementedUserinfoServer) InitUser(context.Context, *InitUserReq) (*Ini
 }
 func (UnimplementedUserinfoServer) GetUserInfo(context.Context, *GetUserInfoReq) (*GetUserInfoRsp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUserInfo not implemented")
+}
+func (UnimplementedUserinfoServer) BatchGetUserInfo(context.Context, *BatchGetUserInfoReq) (*BatchGetUserInfoRsp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method BatchGetUserInfo not implemented")
 }
 func (UnimplementedUserinfoServer) UpdateDynamic(context.Context, *UpdateDynamicReq) (*UpdateDynamicRsp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateDynamic not implemented")
@@ -156,6 +172,24 @@ func _Userinfo_GetUserInfo_Handler(srv interface{}, ctx context.Context, dec fun
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Userinfo_BatchGetUserInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BatchGetUserInfoReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserinfoServer).BatchGetUserInfo(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/turingera.server.userinfo.Userinfo/BatchGetUserInfo",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserinfoServer).BatchGetUserInfo(ctx, req.(*BatchGetUserInfoReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Userinfo_UpdateDynamic_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(UpdateDynamicReq)
 	if err := dec(in); err != nil {
@@ -206,6 +240,10 @@ var Userinfo_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetUserInfo",
 			Handler:    _Userinfo_GetUserInfo_Handler,
+		},
+		{
+			MethodName: "BatchGetUserInfo",
+			Handler:    _Userinfo_BatchGetUserInfo_Handler,
 		},
 		{
 			MethodName: "UpdateDynamic",

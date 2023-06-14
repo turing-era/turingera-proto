@@ -36,6 +36,14 @@ message GetUserInfoRsp {
   UserInfo user = 1;
 }
 
+message BatchGetUserInfoReq {
+  string user_ids = 1;
+}
+
+message BatchGetUserInfoRsp {
+  repeated UserInfo users = 1;
+}
+
 message UpdateDynamicReq {
   string user_id = 1;
   UserDynamic dynamic = 2;
@@ -58,6 +66,8 @@ service Userinfo {
   rpc InitUser(InitUserReq) returns (InitUserRsp);
   // 获取用户信息
   rpc GetUserInfo(GetUserInfoReq) returns (GetUserInfoRsp);
+  // 批量用户信息
+  rpc BatchGetUserInfo(BatchGetUserInfoReq) returns (BatchGetUserInfoRsp);
   // 更新动态数据
   rpc UpdateDynamic (UpdateDynamicReq) returns (UpdateDynamicRsp);
   // 更新access
