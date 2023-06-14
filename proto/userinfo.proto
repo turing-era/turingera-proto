@@ -37,7 +37,7 @@ message GetUserInfoRsp {
 }
 
 message BatchGetUserInfoReq {
-  string user_ids = 1;
+  repeated string user_ids = 1;
 }
 
 message BatchGetUserInfoRsp {
