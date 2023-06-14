@@ -22,6 +22,7 @@ message Info {
   uint32 turn_time = 10;
   bool is_active = 11;
   bool assign = 12;
+  string starter = 13;
 
   repeated Message messages = 20;
 
