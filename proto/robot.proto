@@ -19,7 +19,9 @@ message RobotBasic {
   string name = 3;
   string avatar = 4;
   string location = 5;
+
   int64 create_time = 20;
+  RobotDynamic dynamic = 50;
 }
 
 message SubDialogueStyle {
@@ -76,6 +78,12 @@ message Experience {
   string answer = 3;
 }
 
+message RobotDynamic {
+  int32 score = 1; // 积分
+  uint32 game_total = 2; // 总场数
+  uint32 game_win = 3; // 胜利数
+}
+
 message RobotDetail {
   string robot_id = 1;
   Core core = 2;
@@ -84,12 +92,6 @@ message RobotDetail {
   repeated Experience experiences = 5;
 
   bool use_knowledge = 20; // 是否使用自定义知识库
-}
-
-message RobotDynamic {
-  int32 score = 1; // 积分
-  uint32 game_total = 2; // 总场数
-  uint32 game_win = 3; // 胜利数
 }
 
 message GetEditOptionsReq {
@@ -112,7 +114,6 @@ message GetRobotReq {
 message GetRobotRsp {
   RobotBasic robot = 1;
   RobotDetail detail = 2;
-  RobotDynamic dynamic = 3;
 }
 
 message NewRobotReq {
