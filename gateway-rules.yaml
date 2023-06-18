@@ -42,25 +42,13 @@ http:
       body: "*"
 
     #----- robot 机器人服务 ----- #
-    # 获取性别列表
-    - selector: turingera.server.robot.RobotSvr.GetGenderList
-      post: /robot/GetGenderList
-      body: "*"
-    # 获取身份列表
-    - selector: turingera.server.robot.RobotSvr.GetIdentityList
-      post: /robot/GetIdentityList
-      body: "*"
-    # 获取标签列表
-    - selector: turingera.server.robot.RobotSvr.GetTagList
-      post: /robot/GetTagList
+    # 获取编辑选项
+    - selector: turingera.server.robot.RobotSvr.GetEditOptions
+      post: /robot/GetEditOptions
       body: "*"
     # 获取AI
     - selector: turingera.server.robot.RobotSvr.GetRobot
       post: /robot/GetRobot
-      body: "*"
-    # 获取AI详情
-    - selector: turingera.server.robot.RobotSvr.GetRobotDetail
-      post: /robot/GetRobotDetail
       body: "*"
     # 新建AI
     - selector: turingera.server.robot.RobotSvr.NewRobot

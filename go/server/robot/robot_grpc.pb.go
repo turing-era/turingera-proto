@@ -22,16 +22,10 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type RobotSvrClient interface {
-	// 获取性别列表
-	GetGenderList(ctx context.Context, in *GetGenderListReq, opts ...grpc.CallOption) (*GetGenderListRsp, error)
-	// 获取身份列表
-	GetIdentityList(ctx context.Context, in *GetIdentityListReq, opts ...grpc.CallOption) (*GetIdentityListRsp, error)
-	// 获取标签列表
-	GetTagList(ctx context.Context, in *GetTagListReq, opts ...grpc.CallOption) (*GetTagListRsp, error)
-	// 获取AI
+	// 获取编辑选项
+	GetEditOptions(ctx context.Context, in *GetEditOptionsReq, opts ...grpc.CallOption) (*GetEditOptionsRsp, error)
+	// 获取AI信息
 	GetRobot(ctx context.Context, in *GetRobotReq, opts ...grpc.CallOption) (*GetRobotRsp, error)
-	// 获取AI详情
-	GetRobotDetail(ctx context.Context, in *GetRobotDetailReq, opts ...grpc.CallOption) (*GetRobotDetailRsp, error)
 	// 新建AI
 	NewRobot(ctx context.Context, in *NewRobotReq, opts ...grpc.CallOption) (*NewRobotRsp, error)
 	// 编辑AI
@@ -58,27 +52,9 @@ func NewRobotSvrClient(cc grpc.ClientConnInterface) RobotSvrClient {
 	return &robotSvrClient{cc}
 }
 
-func (c *robotSvrClient) GetGenderList(ctx context.Context, in *GetGenderListReq, opts ...grpc.CallOption) (*GetGenderListRsp, error) {
-	out := new(GetGenderListRsp)
-	err := c.cc.Invoke(ctx, "/turingera.server.robot.RobotSvr/GetGenderList", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *robotSvrClient) GetIdentityList(ctx context.Context, in *GetIdentityListReq, opts ...grpc.CallOption) (*GetIdentityListRsp, error) {
-	out := new(GetIdentityListRsp)
-	err := c.cc.Invoke(ctx, "/turingera.server.robot.RobotSvr/GetIdentityList", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *robotSvrClient) GetTagList(ctx context.Context, in *GetTagListReq, opts ...grpc.CallOption) (*GetTagListRsp, error) {
-	out := new(GetTagListRsp)
-	err := c.cc.Invoke(ctx, "/turingera.server.robot.RobotSvr/GetTagList", in, out, opts...)
+func (c *robotSvrClient) GetEditOptions(ctx context.Context, in *GetEditOptionsReq, opts ...grpc.CallOption) (*GetEditOptionsRsp, error) {
+	out := new(GetEditOptionsRsp)
+	err := c.cc.Invoke(ctx, "/turingera.server.robot.RobotSvr/GetEditOptions", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -88,15 +64,6 @@ func (c *robotSvrClient) GetTagList(ctx context.Context, in *GetTagListReq, opts
 func (c *robotSvrClient) GetRobot(ctx context.Context, in *GetRobotReq, opts ...grpc.CallOption) (*GetRobotRsp, error) {
 	out := new(GetRobotRsp)
 	err := c.cc.Invoke(ctx, "/turingera.server.robot.RobotSvr/GetRobot", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *robotSvrClient) GetRobotDetail(ctx context.Context, in *GetRobotDetailReq, opts ...grpc.CallOption) (*GetRobotDetailRsp, error) {
-	out := new(GetRobotDetailRsp)
-	err := c.cc.Invoke(ctx, "/turingera.server.robot.RobotSvr/GetRobotDetail", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -179,16 +146,10 @@ func (c *robotSvrClient) UpdateUseKnowledge(ctx context.Context, in *UpdateUseKn
 // All implementations must embed UnimplementedRobotSvrServer
 // for forward compatibility
 type RobotSvrServer interface {
-	// 获取性别列表
-	GetGenderList(context.Context, *GetGenderListReq) (*GetGenderListRsp, error)
-	// 获取身份列表
-	GetIdentityList(context.Context, *GetIdentityListReq) (*GetIdentityListRsp, error)
-	// 获取标签列表
-	GetTagList(context.Context, *GetTagListReq) (*GetTagListRsp, error)
-	// 获取AI
+	// 获取编辑选项
+	GetEditOptions(context.Context, *GetEditOptionsReq) (*GetEditOptionsRsp, error)
+	// 获取AI信息
 	GetRobot(context.Context, *GetRobotReq) (*GetRobotRsp, error)
-	// 获取AI详情
-	GetRobotDetail(context.Context, *GetRobotDetailReq) (*GetRobotDetailRsp, error)
 	// 新建AI
 	NewRobot(context.Context, *NewRobotReq) (*NewRobotRsp, error)
 	// 编辑AI
@@ -212,20 +173,11 @@ type RobotSvrServer interface {
 type UnimplementedRobotSvrServer struct {
 }
 
-func (UnimplementedRobotSvrServer) GetGenderList(context.Context, *GetGenderListReq) (*GetGenderListRsp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetGenderList not implemented")
-}
-func (UnimplementedRobotSvrServer) GetIdentityList(context.Context, *GetIdentityListReq) (*GetIdentityListRsp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetIdentityList not implemented")
-}
-func (UnimplementedRobotSvrServer) GetTagList(context.Context, *GetTagListReq) (*GetTagListRsp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetTagList not implemented")
+func (UnimplementedRobotSvrServer) GetEditOptions(context.Context, *GetEditOptionsReq) (*GetEditOptionsRsp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetEditOptions not implemented")
 }
 func (UnimplementedRobotSvrServer) GetRobot(context.Context, *GetRobotReq) (*GetRobotRsp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetRobot not implemented")
-}
-func (UnimplementedRobotSvrServer) GetRobotDetail(context.Context, *GetRobotDetailReq) (*GetRobotDetailRsp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetRobotDetail not implemented")
 }
 func (UnimplementedRobotSvrServer) NewRobot(context.Context, *NewRobotReq) (*NewRobotRsp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method NewRobot not implemented")
@@ -264,56 +216,20 @@ func RegisterRobotSvrServer(s grpc.ServiceRegistrar, srv RobotSvrServer) {
 	s.RegisterService(&RobotSvr_ServiceDesc, srv)
 }
 
-func _RobotSvr_GetGenderList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetGenderListReq)
+func _RobotSvr_GetEditOptions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetEditOptionsReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(RobotSvrServer).GetGenderList(ctx, in)
+		return srv.(RobotSvrServer).GetEditOptions(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/turingera.server.robot.RobotSvr/GetGenderList",
+		FullMethod: "/turingera.server.robot.RobotSvr/GetEditOptions",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(RobotSvrServer).GetGenderList(ctx, req.(*GetGenderListReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _RobotSvr_GetIdentityList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetIdentityListReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(RobotSvrServer).GetIdentityList(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/turingera.server.robot.RobotSvr/GetIdentityList",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(RobotSvrServer).GetIdentityList(ctx, req.(*GetIdentityListReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _RobotSvr_GetTagList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetTagListReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(RobotSvrServer).GetTagList(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/turingera.server.robot.RobotSvr/GetTagList",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(RobotSvrServer).GetTagList(ctx, req.(*GetTagListReq))
+		return srv.(RobotSvrServer).GetEditOptions(ctx, req.(*GetEditOptionsReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -332,24 +248,6 @@ func _RobotSvr_GetRobot_Handler(srv interface{}, ctx context.Context, dec func(i
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(RobotSvrServer).GetRobot(ctx, req.(*GetRobotReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _RobotSvr_GetRobotDetail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetRobotDetailReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(RobotSvrServer).GetRobotDetail(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/turingera.server.robot.RobotSvr/GetRobotDetail",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(RobotSvrServer).GetRobotDetail(ctx, req.(*GetRobotDetailReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -506,24 +404,12 @@ var RobotSvr_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*RobotSvrServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "GetGenderList",
-			Handler:    _RobotSvr_GetGenderList_Handler,
-		},
-		{
-			MethodName: "GetIdentityList",
-			Handler:    _RobotSvr_GetIdentityList_Handler,
-		},
-		{
-			MethodName: "GetTagList",
-			Handler:    _RobotSvr_GetTagList_Handler,
+			MethodName: "GetEditOptions",
+			Handler:    _RobotSvr_GetEditOptions_Handler,
 		},
 		{
 			MethodName: "GetRobot",
 			Handler:    _RobotSvr_GetRobot_Handler,
-		},
-		{
-			MethodName: "GetRobotDetail",
-			Handler:    _RobotSvr_GetRobotDetail_Handler,
 		},
 		{
 			MethodName: "NewRobot",

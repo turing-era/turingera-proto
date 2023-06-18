@@ -3,66 +3,87 @@ package turingera.server.robot;
 option go_package = "github.com/turing-era/turingera-proto/go/server/robot";
 
 message Identity {
-  string identity_id = 1;
-  string name = 2;
+  string id = 1;
+  string role = 2;
   string desc = 3;
-}
-
-message Tag {
-  string tag_id = 1;
-  string name = 2;
-  string desc = 3;
-  string words = 4;
-  string exclude = 5;
 }
 
 message Gender {
-  uint32 gender_id = 1;
+  uint32 id = 1;
   string name_en = 2;
-  string name_cn = 3;
-  string desc = 4;
 }
 
-message GetGenderListReq {
-
-}
-
-message GetGenderListRsp {
-  repeated Gender gender_list = 1;
-}
-
-message GetIdentityListReq {
-
-}
-
-message GetIdentityListRsp {
-  repeated Identity identity_list = 1;
-}
-
-message GetTagListReq {
-  repeated string selected_tag_ids = 1;
-}
-
-message GetTagListRsp {
-  repeated Tag tag_list = 1;
-}
-
-message Robot {
+message RobotBasic {
   string robot_id = 1;
   string user_id = 2;
   string name = 3;
   string avatar = 4;
-  uint32 age = 5;
-  uint32 gender = 6;
-  string location = 7;
-  string identity_id = 8; // 身份
-  string tag_id = 9; // 标签, 逗号分隔
-  Identity custom_identity = 10; // 自定义身份
-  repeated Tag custom_tag = 11; // 自定义标签
-  bool use_knowledge = 12; // 是否使用知识库
-
+  string location = 5;
   int64 create_time = 20;
-  RobotDynamic dynamic = 100;
+}
+
+message SubDialogueStyle {
+  uint32 cate = 1;
+  string sub_style = 2;
+}
+
+message DialogueStyle {
+  string main = 1;
+  repeated SubDialogueStyle subs = 2;
+}
+
+message Core {
+  uint32 age = 1; // 年龄
+  Gender gender = 2; // 性别
+  Identity identity = 3; // 身份
+  DialogueStyle dialogue_style = 4; // 对话风格
+}
+
+message MoodValue {
+  int32 joy = 1;
+  int32 fear = 2;
+  int32 trust = 3;
+  int32 surprise = 4;
+}
+
+message PersonalityValue {
+  int32 positive = 1;
+  int32 peaceful = 2;
+  int32 open = 3;
+  int32 extravert = 4;
+}
+
+message Personality {
+  repeated string character_traits = 1;
+  MoodValue mood = 2;
+  PersonalityValue personality = 3;
+}
+
+message Phrase {
+  string phrase = 1;
+  string meaning = 2;
+  string example = 3;
+}
+
+message PhraseComb {
+  string id = 1;
+  repeated Phrase rows = 2;
+}
+
+message Experience {
+  string id = 1;
+  string question = 2;
+  string answer = 3;
+}
+
+message RobotDetail {
+  string robot_id = 1;
+  Core core = 2;
+  Personality personality = 3;
+  PhraseComb phrase = 4;
+  repeated Experience experiences = 5;
+
+  bool use_knowledge = 20; // 是否使用自定义知识库
 }
 
 message RobotDynamic {
@@ -71,44 +92,47 @@ message RobotDynamic {
   uint32 game_win = 3; // 胜利数
 }
 
-message RobotDetail {
-  string robot_id = 1;
-  Gender gender = 2;
-  Identity identity_info = 3; // 身份信息
-  repeated Tag tag_info = 4; // 标签信息
+message GetEditOptionsReq {
+
+}
+
+message GetEditOptionsRsp {
+  repeated Gender genders = 1;
+  repeated Identity identities = 2;
+  repeated DialogueStyle dialogue_styles = 3;
+  repeated PhraseComb phrase_comb = 4;
 }
 
 message GetRobotReq {
   string robot_id = 1;
+  bool need_detail = 2;
+  bool need_dynamic = 3;
 }
 
 message GetRobotRsp {
-  Robot robot = 1;
-}
-
-message GetRobotDetailReq {
-  string robot_id = 1;
-}
-
-message GetRobotDetailRsp {
-  Robot robot = 1;
+  RobotBasic robot = 1;
   RobotDetail detail = 2;
+  RobotDynamic dynamic = 3;
 }
 
 message NewRobotReq {
-  Robot robot = 1;
+  RobotBasic robot = 1;
+  RobotDetail detail = 2;
 }
 
 message NewRobotRsp {
-  Robot robot = 1;
+  RobotBasic robot = 1;
+  RobotDetail detail = 2;
 }
 
 message EditRobotReq {
-  Robot robot = 1;
+  RobotBasic robot = 1;
+  RobotDetail detail = 2;
 }
 
 message EditRobotRsp {
-  Robot robot = 1;
+  RobotBasic robot = 1;
+  RobotDetail detail = 2;
 }
 
 message DeleteRobotReq {
@@ -123,7 +147,7 @@ message GetMyRobotsReq {
 }
 
 message GetMyRobotsRsp {
-  repeated Robot robots = 1;
+  repeated RobotBasic robots = 1;
 }
 
 message RecommendRobotsReq {
@@ -131,7 +155,7 @@ message RecommendRobotsReq {
 }
 
 message RecommendRobotsRsp {
-  repeated Robot robots = 1;
+  repeated RobotBasic robots = 1;
 }
 
 message RandomRobotIDReq {
@@ -160,16 +184,10 @@ message UpdateUseKnowledgeRsp {
 }
 
 service RobotSvr {
-  // 获取性别列表
-  rpc GetGenderList (GetGenderListReq) returns (GetGenderListRsp);
-  // 获取身份列表
-  rpc GetIdentityList (GetIdentityListReq) returns (GetIdentityListRsp);
-  // 获取标签列表
-  rpc GetTagList (GetTagListReq) returns (GetTagListRsp);
-  // 获取AI
+  // 获取编辑选项
+  rpc GetEditOptions (GetEditOptionsReq) returns (GetEditOptionsRsp);
+  // 获取AI信息
   rpc GetRobot (GetRobotReq) returns (GetRobotRsp);
-  // 获取AI详情
-  rpc GetRobotDetail (GetRobotDetailReq) returns (GetRobotDetailRsp);
   // 新建AI
   rpc NewRobot (NewRobotReq) returns (NewRobotRsp);
   // 编辑AI
