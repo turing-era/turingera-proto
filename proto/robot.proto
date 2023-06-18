@@ -108,7 +108,6 @@ message GetEditOptionsRsp {
 message GetRobotReq {
   string robot_id = 1;
   bool need_detail = 2;
-  bool need_dynamic = 3;
 }
 
 message GetRobotRsp {
