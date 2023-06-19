@@ -3,7 +3,7 @@ package turingera.server.knowledge;
 option go_package = "github.com/turing-era/turingera-proto/go/server/knowledge";
 
 message KnowledgeInfo  {
-  uint32 k_id = 1;
+  string k_id = 1;
   string user_id = 2;
   string robot_id = 3;
   string text = 4;
@@ -28,7 +28,7 @@ message SaveKnowledgeRsp {
 
 message RemKnowledgeReq {
   string robot_id = 1;
-  uint32 k_id = 2;
+  string k_id = 2;
 }
 
 message RemKnowledgeRsp {
