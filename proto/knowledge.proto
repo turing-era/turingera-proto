@@ -28,7 +28,7 @@ message SaveKnowledgeRsp {
 
 message RemKnowledgeReq {
   string robot_id = 1;
-  string k_id = 2;
+  uint32 k_id = 2;
 }
 
 message RemKnowledgeRsp {
