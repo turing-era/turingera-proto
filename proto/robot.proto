@@ -22,12 +22,6 @@ message RobotBasic {
   int64 create_time = 20;
 }
 
-message Robot {
-  RobotBasic basic = 1;
-  RobotCore core = 2;
-  RobotDynamic dynamic = 3;
-}
-
 message SubDialogueStyle {
   uint32 cate = 1;
   string sub_style = 2;
@@ -42,7 +36,19 @@ message RobotCore {
   uint32 age = 1; // 年龄
   Gender gender = 2; // 性别
   Identity identity = 3; // 身份
-  DialogueStyle dialogue_style = 4; // 对话风格
+  repeated DialogueStyle dialogue_styles = 4; // 对话风格
+}
+
+message RobotDynamic {
+  int32 score = 1; // 积分
+  uint32 game_total = 2; // 总场数
+  uint32 game_win = 3; // 胜利数
+}
+
+message Robot {
+  RobotBasic basic = 1;
+  RobotCore core = 2;
+  RobotDynamic dynamic = 3;
 }
 
 message MoodValue {
@@ -81,12 +87,6 @@ message Experience {
   string id = 1;
   string question = 2;
   string answer = 3;
-}
-
-message RobotDynamic {
-  int32 score = 1; // 积分
-  uint32 game_total = 2; // 总场数
-  uint32 game_win = 3; // 胜利数
 }
 
 message RobotDetail {
