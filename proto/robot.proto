@@ -69,7 +69,8 @@ message Phrase {
 
 message PhraseComb {
   string id = 1;
-  repeated Phrase rows = 2;
+  string name = 2;
+  repeated Phrase rows = 3;
 }
 
 message Experience {
