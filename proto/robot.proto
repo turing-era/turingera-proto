@@ -28,8 +28,9 @@ message SubDialogueStyle {
 }
 
 message DialogueStyle {
-  string main = 1;
-  repeated SubDialogueStyle subs = 2;
+  string id = 1;
+  string main = 2;
+  repeated SubDialogueStyle subs = 3;
 }
 
 message RobotCore {
