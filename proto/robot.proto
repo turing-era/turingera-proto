@@ -106,6 +106,7 @@ message GetEditOptionsRsp {
   repeated Identity identities = 2;
   repeated DialogueStyle dialogue_styles = 3;
   repeated PhraseComb phrase_comb = 4;
+  repeated Experience experiences = 5;
 }
 
 message GetRobotReq {
