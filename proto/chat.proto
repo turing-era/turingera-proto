@@ -74,11 +74,18 @@ message GuessRsp {
 
 message WaitGuessReq {
   string chat_id = 1;
-
 }
 
 message WaitGuessRsp {
   Info info = 1;
+}
+
+message ShareReq {
+  string chat_id = 1;
+}
+
+message ShareRsp {
+
 }
 
 service ChatSvr {
@@ -92,5 +99,6 @@ service ChatSvr {
   rpc Guess (GuessReq) returns (GuessRsp);
   // 等待判断
   rpc WaitGuess (WaitGuessReq) returns (WaitGuessRsp);
-
+  // 分享
+  rpc Share (ShareReq) returns (ShareRsp);
 }

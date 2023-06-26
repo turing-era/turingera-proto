@@ -40,6 +40,10 @@ http:
     - selector: turingera.server.chat.ChatSvr.WaitGuess
       post: /chat/WaitGuess
       body: "*"
+    # 分享
+    - selector: turingera.server.chat.ChatSvr.Share
+      post: /chat/Share
+      body: "*"
 
     #----- robot 机器人服务 ----- #
     # 获取编辑选项
