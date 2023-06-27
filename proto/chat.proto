@@ -32,7 +32,8 @@ message Info {
 }
 
 message NewChatReq {
-  string robot_id = 1; // 对话机器人ID，为空表示匹配
+  string user_id = 1;
+  string robot_id = 2; // 对话机器人ID，为空表示匹配
 }
 
 message NewChatRsp {
@@ -49,7 +50,8 @@ message WaitMessageRsp {
 
 message SendMessageReq {
   string chat_id = 1;
-  string text = 2;
+  string user_id = 2;
+  string text = 3;
 }
 
 message SendMessageRsp {
@@ -91,14 +93,19 @@ message ShareRsp {
 service ChatSvr {
   // 新建对话
   rpc NewChat (NewChatReq) returns (NewChatRsp);
-  // 等待消息
-  rpc WaitMessage (WaitMessageReq) returns (WaitMessageRsp);
   // 发送消息
   rpc SendMessage (SendMessageReq) returns (SendMessageRsp);
+  // 等待消息
+  rpc WaitMessage (WaitMessageReq) returns (WaitMessageRsp);
   // 做出判断
   rpc Guess (GuessReq) returns (GuessRsp);
   // 等待判断
   rpc WaitGuess (WaitGuessReq) returns (WaitGuessRsp);
   // 分享
   rpc Share (ShareReq) returns (ShareRsp);
+
+  // public新建对话
+  rpc PublicNewChat (NewChatReq) returns (NewChatRsp);
+  // public发送消息
+  rpc PublicSendMessage (SendMessageReq) returns (SendMessageRsp);
 }

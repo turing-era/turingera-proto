@@ -24,16 +24,20 @@ const _ = grpc.SupportPackageIsVersion7
 type ChatSvrClient interface {
 	// 新建对话
 	NewChat(ctx context.Context, in *NewChatReq, opts ...grpc.CallOption) (*NewChatRsp, error)
-	// 等待消息
-	WaitMessage(ctx context.Context, in *WaitMessageReq, opts ...grpc.CallOption) (*WaitMessageRsp, error)
 	// 发送消息
 	SendMessage(ctx context.Context, in *SendMessageReq, opts ...grpc.CallOption) (*SendMessageRsp, error)
+	// 等待消息
+	WaitMessage(ctx context.Context, in *WaitMessageReq, opts ...grpc.CallOption) (*WaitMessageRsp, error)
 	// 做出判断
 	Guess(ctx context.Context, in *GuessReq, opts ...grpc.CallOption) (*GuessRsp, error)
 	// 等待判断
 	WaitGuess(ctx context.Context, in *WaitGuessReq, opts ...grpc.CallOption) (*WaitGuessRsp, error)
 	// 分享
 	Share(ctx context.Context, in *ShareReq, opts ...grpc.CallOption) (*ShareRsp, error)
+	// public新建对话
+	PublicNewChat(ctx context.Context, in *NewChatReq, opts ...grpc.CallOption) (*NewChatRsp, error)
+	// public发送消息
+	PublicSendMessage(ctx context.Context, in *SendMessageReq, opts ...grpc.CallOption) (*SendMessageRsp, error)
 }
 
 type chatSvrClient struct {
@@ -53,18 +57,18 @@ func (c *chatSvrClient) NewChat(ctx context.Context, in *NewChatReq, opts ...grp
 	return out, nil
 }
 
-func (c *chatSvrClient) WaitMessage(ctx context.Context, in *WaitMessageReq, opts ...grpc.CallOption) (*WaitMessageRsp, error) {
-	out := new(WaitMessageRsp)
-	err := c.cc.Invoke(ctx, "/turingera.server.chat.ChatSvr/WaitMessage", in, out, opts...)
+func (c *chatSvrClient) SendMessage(ctx context.Context, in *SendMessageReq, opts ...grpc.CallOption) (*SendMessageRsp, error) {
+	out := new(SendMessageRsp)
+	err := c.cc.Invoke(ctx, "/turingera.server.chat.ChatSvr/SendMessage", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *chatSvrClient) SendMessage(ctx context.Context, in *SendMessageReq, opts ...grpc.CallOption) (*SendMessageRsp, error) {
-	out := new(SendMessageRsp)
-	err := c.cc.Invoke(ctx, "/turingera.server.chat.ChatSvr/SendMessage", in, out, opts...)
+func (c *chatSvrClient) WaitMessage(ctx context.Context, in *WaitMessageReq, opts ...grpc.CallOption) (*WaitMessageRsp, error) {
+	out := new(WaitMessageRsp)
+	err := c.cc.Invoke(ctx, "/turingera.server.chat.ChatSvr/WaitMessage", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -98,22 +102,44 @@ func (c *chatSvrClient) Share(ctx context.Context, in *ShareReq, opts ...grpc.Ca
 	return out, nil
 }
 
+func (c *chatSvrClient) PublicNewChat(ctx context.Context, in *NewChatReq, opts ...grpc.CallOption) (*NewChatRsp, error) {
+	out := new(NewChatRsp)
+	err := c.cc.Invoke(ctx, "/turingera.server.chat.ChatSvr/PublicNewChat", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *chatSvrClient) PublicSendMessage(ctx context.Context, in *SendMessageReq, opts ...grpc.CallOption) (*SendMessageRsp, error) {
+	out := new(SendMessageRsp)
+	err := c.cc.Invoke(ctx, "/turingera.server.chat.ChatSvr/PublicSendMessage", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ChatSvrServer is the server API for ChatSvr service.
 // All implementations must embed UnimplementedChatSvrServer
 // for forward compatibility
 type ChatSvrServer interface {
 	// 新建对话
 	NewChat(context.Context, *NewChatReq) (*NewChatRsp, error)
-	// 等待消息
-	WaitMessage(context.Context, *WaitMessageReq) (*WaitMessageRsp, error)
 	// 发送消息
 	SendMessage(context.Context, *SendMessageReq) (*SendMessageRsp, error)
+	// 等待消息
+	WaitMessage(context.Context, *WaitMessageReq) (*WaitMessageRsp, error)
 	// 做出判断
 	Guess(context.Context, *GuessReq) (*GuessRsp, error)
 	// 等待判断
 	WaitGuess(context.Context, *WaitGuessReq) (*WaitGuessRsp, error)
 	// 分享
 	Share(context.Context, *ShareReq) (*ShareRsp, error)
+	// public新建对话
+	PublicNewChat(context.Context, *NewChatReq) (*NewChatRsp, error)
+	// public发送消息
+	PublicSendMessage(context.Context, *SendMessageReq) (*SendMessageRsp, error)
 	mustEmbedUnimplementedChatSvrServer()
 }
 
@@ -124,11 +150,11 @@ type UnimplementedChatSvrServer struct {
 func (UnimplementedChatSvrServer) NewChat(context.Context, *NewChatReq) (*NewChatRsp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method NewChat not implemented")
 }
-func (UnimplementedChatSvrServer) WaitMessage(context.Context, *WaitMessageReq) (*WaitMessageRsp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method WaitMessage not implemented")
-}
 func (UnimplementedChatSvrServer) SendMessage(context.Context, *SendMessageReq) (*SendMessageRsp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SendMessage not implemented")
+}
+func (UnimplementedChatSvrServer) WaitMessage(context.Context, *WaitMessageReq) (*WaitMessageRsp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method WaitMessage not implemented")
 }
 func (UnimplementedChatSvrServer) Guess(context.Context, *GuessReq) (*GuessRsp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Guess not implemented")
@@ -138,6 +164,12 @@ func (UnimplementedChatSvrServer) WaitGuess(context.Context, *WaitGuessReq) (*Wa
 }
 func (UnimplementedChatSvrServer) Share(context.Context, *ShareReq) (*ShareRsp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Share not implemented")
+}
+func (UnimplementedChatSvrServer) PublicNewChat(context.Context, *NewChatReq) (*NewChatRsp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PublicNewChat not implemented")
+}
+func (UnimplementedChatSvrServer) PublicSendMessage(context.Context, *SendMessageReq) (*SendMessageRsp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PublicSendMessage not implemented")
 }
 func (UnimplementedChatSvrServer) mustEmbedUnimplementedChatSvrServer() {}
 
@@ -170,24 +202,6 @@ func _ChatSvr_NewChat_Handler(srv interface{}, ctx context.Context, dec func(int
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ChatSvr_WaitMessage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(WaitMessageReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ChatSvrServer).WaitMessage(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/turingera.server.chat.ChatSvr/WaitMessage",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ChatSvrServer).WaitMessage(ctx, req.(*WaitMessageReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _ChatSvr_SendMessage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(SendMessageReq)
 	if err := dec(in); err != nil {
@@ -202,6 +216,24 @@ func _ChatSvr_SendMessage_Handler(srv interface{}, ctx context.Context, dec func
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ChatSvrServer).SendMessage(ctx, req.(*SendMessageReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ChatSvr_WaitMessage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(WaitMessageReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ChatSvrServer).WaitMessage(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/turingera.server.chat.ChatSvr/WaitMessage",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ChatSvrServer).WaitMessage(ctx, req.(*WaitMessageReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -260,6 +292,42 @@ func _ChatSvr_Share_Handler(srv interface{}, ctx context.Context, dec func(inter
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ChatSvr_PublicNewChat_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(NewChatReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ChatSvrServer).PublicNewChat(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/turingera.server.chat.ChatSvr/PublicNewChat",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ChatSvrServer).PublicNewChat(ctx, req.(*NewChatReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ChatSvr_PublicSendMessage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SendMessageReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ChatSvrServer).PublicSendMessage(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/turingera.server.chat.ChatSvr/PublicSendMessage",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ChatSvrServer).PublicSendMessage(ctx, req.(*SendMessageReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ChatSvr_ServiceDesc is the grpc.ServiceDesc for ChatSvr service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -272,12 +340,12 @@ var ChatSvr_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _ChatSvr_NewChat_Handler,
 		},
 		{
-			MethodName: "WaitMessage",
-			Handler:    _ChatSvr_WaitMessage_Handler,
-		},
-		{
 			MethodName: "SendMessage",
 			Handler:    _ChatSvr_SendMessage_Handler,
+		},
+		{
+			MethodName: "WaitMessage",
+			Handler:    _ChatSvr_WaitMessage_Handler,
 		},
 		{
 			MethodName: "Guess",
@@ -290,6 +358,14 @@ var ChatSvr_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Share",
 			Handler:    _ChatSvr_Share_Handler,
+		},
+		{
+			MethodName: "PublicNewChat",
+			Handler:    _ChatSvr_PublicNewChat_Handler,
+		},
+		{
+			MethodName: "PublicSendMessage",
+			Handler:    _ChatSvr_PublicSendMessage_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

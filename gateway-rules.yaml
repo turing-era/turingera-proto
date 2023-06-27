@@ -45,12 +45,12 @@ http:
       post: /chat/Share
       body: "*"
 
-    # 新建对话
-    - selector: turingera.server.chat.ChatSvr.NewChat
+    # public 新建对话
+    - selector: turingera.server.chat.ChatSvr.PublicNewChat
       post: /public/chat/NewChat
       body: "*"
-    # 发送消息
-    - selector: turingera.server.chat.ChatSvr.SendMessage
+    # public 发送消息
+    - selector: turingera.server.chat.ChatSvr.PublicSendMessage
       post: /public/chat/SendMessage
       body: "*"
 
