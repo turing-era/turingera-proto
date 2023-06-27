@@ -14,8 +14,9 @@ message Gender {
 }
 
 enum RobotType {
-  ROBOT_TYPE_NORMAL = 0;
-  ROBOT_TYPE_REPLICA = 1;
+  ROBOT_TYPE_UNKNOWN = 0;
+  ROBOT_TYPE_NORMAL = 1;
+  ROBOT_TYPE_REPLICA = 2;
 }
 
 message RobotBasic {
@@ -155,7 +156,7 @@ message DeleteRobotRsp {
 }
 
 message GetMyRobotsReq {
-  uint32 type = 1; // RobotType
+  uint32 gType = 1; // RobotType
 }
 
 message GetMyRobotsRsp {
