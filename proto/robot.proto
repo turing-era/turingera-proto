@@ -25,7 +25,7 @@ message RobotBasic {
   string name = 3;
   string avatar = 4;
   string location = 5;
-  uint32 type = 6; // RobotType
+  uint32 bot_type = 6; // RobotType
   int64 create_time = 20;
 }
 
@@ -156,7 +156,7 @@ message DeleteRobotRsp {
 }
 
 message GetMyRobotsReq {
-  uint32 gType = 1; // RobotType
+  uint32 bot_type = 1; // RobotType
 }
 
 message GetMyRobotsRsp {
