@@ -37,6 +37,7 @@ message NewChatReq {
   string robot_id = 1; // 对话机器人ID，为空表示匹配
   string user_id = 2; // public必填
   string nick = 3; // public必填
+  string platform = 4;
 }
 
 message NewChatRsp {
