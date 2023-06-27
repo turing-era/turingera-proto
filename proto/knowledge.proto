@@ -7,6 +7,7 @@ message KnowledgeInfo  {
   string user_id = 2;
   string robot_id = 3;
   string text = 4;
+  int64 create_time = 10;
 }
 
 message GetKnowledgeListReq {
