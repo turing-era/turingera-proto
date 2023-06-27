@@ -13,12 +13,18 @@ message Gender {
   string name_en = 2;
 }
 
+enum RobotType {
+  ROBOT_TYPE_NORMAL = 0;
+  ROBOT_TYPE_REPLICA = 1;
+}
+
 message RobotBasic {
   string robot_id = 1;
   string user_id = 2;
   string name = 3;
   string avatar = 4;
   string location = 5;
+  uint32 type = 6; // RobotType
   int64 create_time = 20;
 }
 
@@ -149,6 +155,7 @@ message DeleteRobotRsp {
 }
 
 message GetMyRobotsReq {
+  uint32 type = 1; // RobotType
 }
 
 message GetMyRobotsRsp {
