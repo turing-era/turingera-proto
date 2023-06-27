@@ -24,13 +24,13 @@ http:
     - selector: turingera.server.chat.ChatSvr.NewChat
       post: /chat/NewChat
       body: "*"
-    # 等待消息
-    - selector: turingera.server.chat.ChatSvr.WaitMessage
-      post: /chat/WaitMessage
-      body: "*"
     # 发送消息
     - selector: turingera.server.chat.ChatSvr.SendMessage
       post: /chat/SendMessage
+      body: "*"
+    # 等待消息
+    - selector: turingera.server.chat.ChatSvr.WaitMessage
+      post: /chat/WaitMessage
       body: "*"
     # 做出判断
     - selector: turingera.server.chat.ChatSvr.Guess
@@ -43,6 +43,15 @@ http:
     # 分享
     - selector: turingera.server.chat.ChatSvr.Share
       post: /chat/Share
+      body: "*"
+
+    # 新建对话
+    - selector: turingera.server.chat.ChatSvr.NewChat
+      post: /public_chat/NewChat
+      body: "*"
+    # 发送消息
+    - selector: turingera.server.chat.ChatSvr.SendMessage
+      post: /public_chat/SendMessage
       body: "*"
 
     #----- robot 机器人服务 ----- #

@@ -38,6 +38,7 @@ enum LoginResFlag {
   LOGIN_SUCC = 0;
   LOGIN_ACCESS_CODE_EMPTY = 1; // 需要填写邀请码
   LOGIN_ACCESS_CODE_USED = 2; // 邀请码已被使用
+  LOGIN_ACCESS_CODE_INVALID = 3; // 邀请码错误
 }
 
 message LoginRsp {
