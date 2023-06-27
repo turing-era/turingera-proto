@@ -23,9 +23,11 @@ message Info {
   bool is_active = 11;
   bool assign = 12;
   string starter = 13;
+  string cur_nick = 14;
+  string platform = 15;
+  string location = 16;
 
   repeated Message messages = 20;
-
   bool guessed = 50;
   bool correct = 51;
   int32 score = 52;
