@@ -47,11 +47,11 @@ http:
 
     # 新建对话
     - selector: turingera.server.chat.ChatSvr.NewChat
-      post: /public_chat/NewChat
+      post: /public/chat/NewChat
       body: "*"
     # 发送消息
     - selector: turingera.server.chat.ChatSvr.SendMessage
-      post: /public_chat/SendMessage
+      post: /public/chat/SendMessage
       body: "*"
 
     #----- robot 机器人服务 ----- #
