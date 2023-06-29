@@ -44,8 +44,9 @@ message LoadKnowledgeRsp {
 }
 
 message SearchKnowledgeReq {
-  string robot_id = 1;
-  string text = 2;
+  string user_id = 1;
+  string robot_id = 2;
+  string text = 3;
 }
 
 message SearchKnowledgeRsp {
