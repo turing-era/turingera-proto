@@ -101,6 +101,10 @@ http:
     - selector: turingera.server.knowledge.KnowledgeSvr.SaveKnowledge
       post: /knowledge/SaveKnowledge
       body: "*"
+    # 保存知识资料
+    - selector: turingera.server.knowledge.KnowledgeSvr.SaveAllKnowledge
+      post: /knowledge/SaveAllKnowledge
+      body: "*"
     # 删除知识资料
     - selector: turingera.server.knowledge.KnowledgeSvr.RemKnowledge
       post: /knowledge/RemKnowledge

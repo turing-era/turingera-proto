@@ -26,6 +26,8 @@ type KnowledgeSvrClient interface {
 	GetKnowledgeList(ctx context.Context, in *GetKnowledgeListReq, opts ...grpc.CallOption) (*GetKnowledgeListRsp, error)
 	// 保存知识资料
 	SaveKnowledge(ctx context.Context, in *SaveKnowledgeReq, opts ...grpc.CallOption) (*SaveKnowledgeRsp, error)
+	// 保存前部知识资料
+	SaveAllKnowledge(ctx context.Context, in *SaveAllKnowledgeReq, opts ...grpc.CallOption) (*SaveAllKnowledgeRsp, error)
 	// 删除知识资料
 	RemKnowledge(ctx context.Context, in *RemKnowledgeReq, opts ...grpc.CallOption) (*RemKnowledgeRsp, error)
 	// 加载知识库
@@ -54,6 +56,15 @@ func (c *knowledgeSvrClient) GetKnowledgeList(ctx context.Context, in *GetKnowle
 func (c *knowledgeSvrClient) SaveKnowledge(ctx context.Context, in *SaveKnowledgeReq, opts ...grpc.CallOption) (*SaveKnowledgeRsp, error) {
 	out := new(SaveKnowledgeRsp)
 	err := c.cc.Invoke(ctx, "/turingera.server.knowledge.KnowledgeSvr/SaveKnowledge", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *knowledgeSvrClient) SaveAllKnowledge(ctx context.Context, in *SaveAllKnowledgeReq, opts ...grpc.CallOption) (*SaveAllKnowledgeRsp, error) {
+	out := new(SaveAllKnowledgeRsp)
+	err := c.cc.Invoke(ctx, "/turingera.server.knowledge.KnowledgeSvr/SaveAllKnowledge", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -95,6 +106,8 @@ type KnowledgeSvrServer interface {
 	GetKnowledgeList(context.Context, *GetKnowledgeListReq) (*GetKnowledgeListRsp, error)
 	// 保存知识资料
 	SaveKnowledge(context.Context, *SaveKnowledgeReq) (*SaveKnowledgeRsp, error)
+	// 保存前部知识资料
+	SaveAllKnowledge(context.Context, *SaveAllKnowledgeReq) (*SaveAllKnowledgeRsp, error)
 	// 删除知识资料
 	RemKnowledge(context.Context, *RemKnowledgeReq) (*RemKnowledgeRsp, error)
 	// 加载知识库
@@ -113,6 +126,9 @@ func (UnimplementedKnowledgeSvrServer) GetKnowledgeList(context.Context, *GetKno
 }
 func (UnimplementedKnowledgeSvrServer) SaveKnowledge(context.Context, *SaveKnowledgeReq) (*SaveKnowledgeRsp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SaveKnowledge not implemented")
+}
+func (UnimplementedKnowledgeSvrServer) SaveAllKnowledge(context.Context, *SaveAllKnowledgeReq) (*SaveAllKnowledgeRsp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SaveAllKnowledge not implemented")
 }
 func (UnimplementedKnowledgeSvrServer) RemKnowledge(context.Context, *RemKnowledgeReq) (*RemKnowledgeRsp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RemKnowledge not implemented")
@@ -168,6 +184,24 @@ func _KnowledgeSvr_SaveKnowledge_Handler(srv interface{}, ctx context.Context, d
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(KnowledgeSvrServer).SaveKnowledge(ctx, req.(*SaveKnowledgeReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _KnowledgeSvr_SaveAllKnowledge_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SaveAllKnowledgeReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(KnowledgeSvrServer).SaveAllKnowledge(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/turingera.server.knowledge.KnowledgeSvr/SaveAllKnowledge",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(KnowledgeSvrServer).SaveAllKnowledge(ctx, req.(*SaveAllKnowledgeReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -240,6 +274,10 @@ var KnowledgeSvr_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "SaveKnowledge",
 			Handler:    _KnowledgeSvr_SaveKnowledge_Handler,
+		},
+		{
+			MethodName: "SaveAllKnowledge",
+			Handler:    _KnowledgeSvr_SaveAllKnowledge_Handler,
 		},
 		{
 			MethodName: "RemKnowledge",

@@ -26,6 +26,14 @@ message SaveKnowledgeRsp {
   KnowledgeInfo info = 1;
 }
 
+message SaveAllKnowledgeReq {
+  repeated KnowledgeInfo info = 1;
+}
+
+message SaveAllKnowledgeRsp {
+  repeated KnowledgeInfo info = 1;
+}
+
 message RemKnowledgeReq {
   string robot_id = 1;
   string k_id = 2;
@@ -58,6 +66,8 @@ service KnowledgeSvr {
   rpc GetKnowledgeList (GetKnowledgeListReq) returns (GetKnowledgeListRsp);
   // 保存知识资料
   rpc SaveKnowledge (SaveKnowledgeReq) returns (SaveKnowledgeRsp);
+  // 保存前部知识资料
+  rpc SaveAllKnowledge (SaveAllKnowledgeReq) returns (SaveAllKnowledgeRsp);
   // 删除知识资料
   rpc RemKnowledge (RemKnowledgeReq) returns (RemKnowledgeRsp);
   // 加载知识库
