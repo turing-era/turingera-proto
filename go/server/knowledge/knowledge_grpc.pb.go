@@ -24,6 +24,8 @@ const _ = grpc.SupportPackageIsVersion7
 type KnowledgeSvrClient interface {
 	// 获取知识列表
 	GetKnowledgeList(ctx context.Context, in *GetKnowledgeListReq, opts ...grpc.CallOption) (*GetKnowledgeListRsp, error)
+	// 获取AI知识库信息
+	GetRobotKnowledgeInfo(ctx context.Context, in *GetRobotKnowledgeInfoReq, opts ...grpc.CallOption) (*GetRobotKnowledgeInfoRsp, error)
 	// 保存知识资料
 	SaveKnowledge(ctx context.Context, in *SaveKnowledgeReq, opts ...grpc.CallOption) (*SaveKnowledgeRsp, error)
 	// 保存前部知识资料
@@ -47,6 +49,15 @@ func NewKnowledgeSvrClient(cc grpc.ClientConnInterface) KnowledgeSvrClient {
 func (c *knowledgeSvrClient) GetKnowledgeList(ctx context.Context, in *GetKnowledgeListReq, opts ...grpc.CallOption) (*GetKnowledgeListRsp, error) {
 	out := new(GetKnowledgeListRsp)
 	err := c.cc.Invoke(ctx, "/turingera.server.knowledge.KnowledgeSvr/GetKnowledgeList", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *knowledgeSvrClient) GetRobotKnowledgeInfo(ctx context.Context, in *GetRobotKnowledgeInfoReq, opts ...grpc.CallOption) (*GetRobotKnowledgeInfoRsp, error) {
+	out := new(GetRobotKnowledgeInfoRsp)
+	err := c.cc.Invoke(ctx, "/turingera.server.knowledge.KnowledgeSvr/GetRobotKnowledgeInfo", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -104,6 +115,8 @@ func (c *knowledgeSvrClient) SearchKnowledge(ctx context.Context, in *SearchKnow
 type KnowledgeSvrServer interface {
 	// 获取知识列表
 	GetKnowledgeList(context.Context, *GetKnowledgeListReq) (*GetKnowledgeListRsp, error)
+	// 获取AI知识库信息
+	GetRobotKnowledgeInfo(context.Context, *GetRobotKnowledgeInfoReq) (*GetRobotKnowledgeInfoRsp, error)
 	// 保存知识资料
 	SaveKnowledge(context.Context, *SaveKnowledgeReq) (*SaveKnowledgeRsp, error)
 	// 保存前部知识资料
@@ -123,6 +136,9 @@ type UnimplementedKnowledgeSvrServer struct {
 
 func (UnimplementedKnowledgeSvrServer) GetKnowledgeList(context.Context, *GetKnowledgeListReq) (*GetKnowledgeListRsp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetKnowledgeList not implemented")
+}
+func (UnimplementedKnowledgeSvrServer) GetRobotKnowledgeInfo(context.Context, *GetRobotKnowledgeInfoReq) (*GetRobotKnowledgeInfoRsp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetRobotKnowledgeInfo not implemented")
 }
 func (UnimplementedKnowledgeSvrServer) SaveKnowledge(context.Context, *SaveKnowledgeReq) (*SaveKnowledgeRsp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SaveKnowledge not implemented")
@@ -166,6 +182,24 @@ func _KnowledgeSvr_GetKnowledgeList_Handler(srv interface{}, ctx context.Context
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(KnowledgeSvrServer).GetKnowledgeList(ctx, req.(*GetKnowledgeListReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _KnowledgeSvr_GetRobotKnowledgeInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetRobotKnowledgeInfoReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(KnowledgeSvrServer).GetRobotKnowledgeInfo(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/turingera.server.knowledge.KnowledgeSvr/GetRobotKnowledgeInfo",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(KnowledgeSvrServer).GetRobotKnowledgeInfo(ctx, req.(*GetRobotKnowledgeInfoReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -270,6 +304,10 @@ var KnowledgeSvr_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetKnowledgeList",
 			Handler:    _KnowledgeSvr_GetKnowledgeList_Handler,
+		},
+		{
+			MethodName: "GetRobotKnowledgeInfo",
+			Handler:    _KnowledgeSvr_GetRobotKnowledgeInfo_Handler,
 		},
 		{
 			MethodName: "SaveKnowledge",

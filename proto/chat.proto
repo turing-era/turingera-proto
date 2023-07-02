@@ -34,8 +34,8 @@ message Info {
   string cur_platform = 101;
   string cur_location = 102;
 
-  string status = 201;
-  string knowledge_count = 202;
+  string knowledge_count = 201;
+  string knowledge_status = 202;
 }
 
 message NewChatReq {

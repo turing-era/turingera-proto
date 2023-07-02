@@ -16,7 +16,16 @@ message GetKnowledgeListReq {
 
 message GetKnowledgeListRsp {
   repeated KnowledgeInfo infos = 1;
-  string k_status = 2;
+  string knowledge_status = 2;
+}
+
+message GetRobotKnowledgeInfoReq {
+  string robot_id = 1;
+}
+
+message GetRobotKnowledgeInfoRsp {
+  uint32 knowledge_count = 1;
+  string knowledge_status = 2;
 }
 
 message SaveKnowledgeReq {
@@ -29,12 +38,12 @@ message SaveKnowledgeRsp {
 
 message SaveAllKnowledgeReq {
   repeated KnowledgeInfo infos = 1;
-  string k_status = 2;
+  string knowledge_status = 2;
 }
 
 message SaveAllKnowledgeRsp {
   repeated KnowledgeInfo infos = 1;
-  string k_status = 2;
+  string knowledge_status = 2;
 }
 
 message RemKnowledgeReq {
@@ -67,6 +76,8 @@ message SearchKnowledgeRsp {
 service KnowledgeSvr {
   // 获取知识列表
   rpc GetKnowledgeList (GetKnowledgeListReq) returns (GetKnowledgeListRsp);
+  // 获取AI知识库信息
+  rpc GetRobotKnowledgeInfo (GetRobotKnowledgeInfoReq) returns (GetRobotKnowledgeInfoRsp);
   // 保存知识资料
   rpc SaveKnowledge (SaveKnowledgeReq) returns (SaveKnowledgeRsp);
   // 保存前部知识资料
