@@ -95,20 +95,20 @@ message ShareRsp {
 
 }
 
-message GetRobotChatHistoryReq {
-  string robot_id = 1;
-}
-
-message GetRobotChatHistoryRsp {
-  repeated Info infos = 1;
-}
-
 message GetChatInfoReq {
   string chat_id = 1;
 }
 
 message GetChatInfoRsp {
   Info info = 1;
+}
+
+message GetRobotChatHistoryReq {
+  string robot_id = 1;
+}
+
+message GetRobotChatHistoryRsp {
+  repeated Info infos = 1;
 }
 
 service ChatSvr {
@@ -129,8 +129,8 @@ service ChatSvr {
   rpc PublicNewChat (NewChatReq) returns (NewChatRsp);
   // public发送消息
   rpc PublicSendMessage (SendMessageReq) returns (SendMessageRsp);
-  // 获取AI对话记录
-  rpc GetRobotChatHistory (GetRobotChatHistoryReq) returns (GetRobotChatHistoryRsp);
   // 获取对话详情
   rpc GetChatInfo (GetChatInfoReq) returns (GetChatInfoRsp);
+  // 获取AI对话记录
+  rpc GetRobotChatHistory (GetRobotChatHistoryReq) returns (GetRobotChatHistoryRsp);
 }
