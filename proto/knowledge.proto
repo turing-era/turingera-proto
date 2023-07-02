@@ -16,6 +16,7 @@ message GetKnowledgeListReq {
 
 message GetKnowledgeListRsp {
   repeated KnowledgeInfo infos = 1;
+  string status = 2;
 }
 
 message SaveKnowledgeReq {
@@ -33,6 +34,7 @@ message SaveAllKnowledgeReq {
 
 message SaveAllKnowledgeRsp {
   repeated KnowledgeInfo infos = 1;
+  string status = 2;
 }
 
 message RemKnowledgeReq {
