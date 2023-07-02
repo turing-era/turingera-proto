@@ -1,0 +1,7 @@
+syntax = "proto3";
+package funstar.common;
+option go_package = "github.com/turing-era/turingera-proto/go/common";
+
+message Cookie {
+  uint32 seq = 1;
+}
