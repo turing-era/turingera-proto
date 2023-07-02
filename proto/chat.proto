@@ -23,6 +23,7 @@ message Info {
   bool is_active = 11;
   bool assign = 12;
   string starter = 13;
+  uint32 msg_count = 14;
 
   repeated Message messages = 20;
   bool guessed = 50;
