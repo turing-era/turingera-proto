@@ -28,6 +28,7 @@ message SaveKnowledgeRsp {
 
 message SaveAllKnowledgeReq {
   repeated KnowledgeInfo info = 1;
+  string status = 2;
 }
 
 message SaveAllKnowledgeRsp {
