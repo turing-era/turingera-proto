@@ -95,10 +95,6 @@ message ShareRsp {
 
 }
 
-message ChatHistory {
-
-}
-
 message GetRobotChatHistoryReq {
   string robot_id = 1;
 }
