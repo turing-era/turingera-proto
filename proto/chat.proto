@@ -127,13 +127,13 @@ service ChatSvr {
   rpc WaitGuess (WaitGuessReq) returns (WaitGuessRsp);
   // 分享
   rpc Share (ShareReq) returns (ShareRsp);
+  // 获取对话详情
+  rpc GetChatInfo (GetChatInfoReq) returns (GetChatInfoRsp);
+  // 获取AI对话记录
+  rpc GetRobotChatHistory (GetRobotChatHistoryReq) returns (GetRobotChatHistoryRsp);
 
   // public新建对话
   rpc PublicNewChat (NewChatReq) returns (NewChatRsp);
   // public发送消息
   rpc PublicSendMessage (SendMessageReq) returns (SendMessageRsp);
-  // 获取对话详情
-  rpc GetChatInfo (GetChatInfoReq) returns (GetChatInfoRsp);
-  // 获取AI对话记录
-  rpc GetRobotChatHistory (GetRobotChatHistoryReq) returns (GetRobotChatHistoryRsp);
 }
