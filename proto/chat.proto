@@ -105,10 +105,13 @@ message GetChatInfoRsp {
 
 message GetRobotChatHistoryReq {
   string robot_id = 1;
+  bytes cookie = 2;
 }
 
 message GetRobotChatHistoryRsp {
   repeated Info infos = 1;
+  bytes cookie = 2;
+  bool is_end = 3;
 }
 
 service ChatSvr {
