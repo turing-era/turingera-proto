@@ -38,6 +38,10 @@ type ChatSvrClient interface {
 	PublicNewChat(ctx context.Context, in *NewChatReq, opts ...grpc.CallOption) (*NewChatRsp, error)
 	// public发送消息
 	PublicSendMessage(ctx context.Context, in *SendMessageReq, opts ...grpc.CallOption) (*SendMessageRsp, error)
+	// 获取AI对话记录
+	GetRobotChatHistory(ctx context.Context, in *GetRobotChatHistoryReq, opts ...grpc.CallOption) (*GetRobotChatHistoryRsp, error)
+	// 获取对话详情
+	GetChatInfo(ctx context.Context, in *GetChatInfoReq, opts ...grpc.CallOption) (*GetChatInfoRsp, error)
 }
 
 type chatSvrClient struct {
@@ -120,6 +124,24 @@ func (c *chatSvrClient) PublicSendMessage(ctx context.Context, in *SendMessageRe
 	return out, nil
 }
 
+func (c *chatSvrClient) GetRobotChatHistory(ctx context.Context, in *GetRobotChatHistoryReq, opts ...grpc.CallOption) (*GetRobotChatHistoryRsp, error) {
+	out := new(GetRobotChatHistoryRsp)
+	err := c.cc.Invoke(ctx, "/turingera.server.chat.ChatSvr/GetRobotChatHistory", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *chatSvrClient) GetChatInfo(ctx context.Context, in *GetChatInfoReq, opts ...grpc.CallOption) (*GetChatInfoRsp, error) {
+	out := new(GetChatInfoRsp)
+	err := c.cc.Invoke(ctx, "/turingera.server.chat.ChatSvr/GetChatInfo", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ChatSvrServer is the server API for ChatSvr service.
 // All implementations must embed UnimplementedChatSvrServer
 // for forward compatibility
@@ -140,6 +162,10 @@ type ChatSvrServer interface {
 	PublicNewChat(context.Context, *NewChatReq) (*NewChatRsp, error)
 	// public发送消息
 	PublicSendMessage(context.Context, *SendMessageReq) (*SendMessageRsp, error)
+	// 获取AI对话记录
+	GetRobotChatHistory(context.Context, *GetRobotChatHistoryReq) (*GetRobotChatHistoryRsp, error)
+	// 获取对话详情
+	GetChatInfo(context.Context, *GetChatInfoReq) (*GetChatInfoRsp, error)
 	mustEmbedUnimplementedChatSvrServer()
 }
 
@@ -170,6 +196,12 @@ func (UnimplementedChatSvrServer) PublicNewChat(context.Context, *NewChatReq) (*
 }
 func (UnimplementedChatSvrServer) PublicSendMessage(context.Context, *SendMessageReq) (*SendMessageRsp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PublicSendMessage not implemented")
+}
+func (UnimplementedChatSvrServer) GetRobotChatHistory(context.Context, *GetRobotChatHistoryReq) (*GetRobotChatHistoryRsp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetRobotChatHistory not implemented")
+}
+func (UnimplementedChatSvrServer) GetChatInfo(context.Context, *GetChatInfoReq) (*GetChatInfoRsp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetChatInfo not implemented")
 }
 func (UnimplementedChatSvrServer) mustEmbedUnimplementedChatSvrServer() {}
 
@@ -328,6 +360,42 @@ func _ChatSvr_PublicSendMessage_Handler(srv interface{}, ctx context.Context, de
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ChatSvr_GetRobotChatHistory_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetRobotChatHistoryReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ChatSvrServer).GetRobotChatHistory(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/turingera.server.chat.ChatSvr/GetRobotChatHistory",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ChatSvrServer).GetRobotChatHistory(ctx, req.(*GetRobotChatHistoryReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ChatSvr_GetChatInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetChatInfoReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ChatSvrServer).GetChatInfo(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/turingera.server.chat.ChatSvr/GetChatInfo",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ChatSvrServer).GetChatInfo(ctx, req.(*GetChatInfoReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ChatSvr_ServiceDesc is the grpc.ServiceDesc for ChatSvr service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -366,6 +434,14 @@ var ChatSvr_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "PublicSendMessage",
 			Handler:    _ChatSvr_PublicSendMessage_Handler,
+		},
+		{
+			MethodName: "GetRobotChatHistory",
+			Handler:    _ChatSvr_GetRobotChatHistory_Handler,
+		},
+		{
+			MethodName: "GetChatInfo",
+			Handler:    _ChatSvr_GetChatInfo_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

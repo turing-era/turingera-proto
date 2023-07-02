@@ -53,6 +53,14 @@ http:
     - selector: turingera.server.chat.ChatSvr.PublicSendMessage
       post: /public/chat/SendMessage
       body: "*"
+    # 获取AI对话记录
+    - selector: turingera.server.chat.ChatSvr.GetRobotChatHistory
+      post: /public/chat/GetRobotChatHistory
+      body: "*"
+    # 获取对话详情
+    - selector: turingera.server.chat.ChatSvr.GetChatInfo
+      post: /public/chat/GetChatInfo
+      body: "*"
 
     #----- robot 机器人服务 ----- #
     # 获取编辑选项
