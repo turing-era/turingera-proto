@@ -27,12 +27,12 @@ message SaveKnowledgeRsp {
 }
 
 message SaveAllKnowledgeReq {
-  repeated KnowledgeInfo info = 1;
+  repeated KnowledgeInfo infos = 1;
   string status = 2;
 }
 
 message SaveAllKnowledgeRsp {
-  repeated KnowledgeInfo info = 1;
+  repeated KnowledgeInfo infos = 1;
 }
 
 message RemKnowledgeReq {
