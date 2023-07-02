@@ -142,29 +142,34 @@ type Info struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	ChatId          string     `protobuf:"bytes,1,opt,name=chat_id,json=chatId,proto3" json:"chat_id,omitempty"`
-	ChatTime        uint32     `protobuf:"varint,2,opt,name=chat_time,json=chatTime,proto3" json:"chat_time,omitempty"`
-	UserId          string     `protobuf:"bytes,3,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	CreatedAt       int64      `protobuf:"varint,4,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	NumParticipants uint32     `protobuf:"varint,5,opt,name=num_participants,json=numParticipants,proto3" json:"num_participants,omitempty"`
-	PartnerId       string     `protobuf:"bytes,6,opt,name=partner_id,json=partnerId,proto3" json:"partner_id,omitempty"`
-	PartnerName     string     `protobuf:"bytes,7,opt,name=partner_name,json=partnerName,proto3" json:"partner_name,omitempty"`
-	PartnerAvatar   string     `protobuf:"bytes,8,opt,name=partner_avatar,json=partnerAvatar,proto3" json:"partner_avatar,omitempty"`
-	IsMyTurn        bool       `protobuf:"varint,9,opt,name=is_my_turn,json=isMyTurn,proto3" json:"is_my_turn,omitempty"`
-	TurnTime        uint32     `protobuf:"varint,10,opt,name=turn_time,json=turnTime,proto3" json:"turn_time,omitempty"`
-	IsActive        bool       `protobuf:"varint,11,opt,name=is_active,json=isActive,proto3" json:"is_active,omitempty"`
-	Assign          bool       `protobuf:"varint,12,opt,name=assign,proto3" json:"assign,omitempty"`
-	Starter         string     `protobuf:"bytes,13,opt,name=starter,proto3" json:"starter,omitempty"`
-	MsgCount        uint32     `protobuf:"varint,14,opt,name=msg_count,json=msgCount,proto3" json:"msg_count,omitempty"`
-	Messages        []*Message `protobuf:"bytes,20,rep,name=messages,proto3" json:"messages,omitempty"`
-	Guessed         bool       `protobuf:"varint,50,opt,name=guessed,proto3" json:"guessed,omitempty"`
-	Correct         bool       `protobuf:"varint,51,opt,name=correct,proto3" json:"correct,omitempty"`
-	Score           int32      `protobuf:"varint,52,opt,name=score,proto3" json:"score,omitempty"`
-	CurNick         string     `protobuf:"bytes,100,opt,name=cur_nick,json=curNick,proto3" json:"cur_nick,omitempty"`
-	CurPlatform     string     `protobuf:"bytes,101,opt,name=cur_platform,json=curPlatform,proto3" json:"cur_platform,omitempty"`
-	CurLocation     string     `protobuf:"bytes,102,opt,name=cur_location,json=curLocation,proto3" json:"cur_location,omitempty"`
-	KnowledgeCount  string     `protobuf:"bytes,201,opt,name=knowledge_count,json=knowledgeCount,proto3" json:"knowledge_count,omitempty"`
-	KnowledgeStatus string     `protobuf:"bytes,202,opt,name=knowledge_status,json=knowledgeStatus,proto3" json:"knowledge_status,omitempty"`
+	// 基本信息
+	ChatId          string `protobuf:"bytes,1,opt,name=chat_id,json=chatId,proto3" json:"chat_id,omitempty"`
+	ChatTime        uint32 `protobuf:"varint,2,opt,name=chat_time,json=chatTime,proto3" json:"chat_time,omitempty"`
+	UserId          string `protobuf:"bytes,3,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	CreatedAt       int64  `protobuf:"varint,4,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	NumParticipants uint32 `protobuf:"varint,5,opt,name=num_participants,json=numParticipants,proto3" json:"num_participants,omitempty"`
+	PartnerId       string `protobuf:"bytes,6,opt,name=partner_id,json=partnerId,proto3" json:"partner_id,omitempty"`
+	PartnerName     string `protobuf:"bytes,7,opt,name=partner_name,json=partnerName,proto3" json:"partner_name,omitempty"`
+	PartnerAvatar   string `protobuf:"bytes,8,opt,name=partner_avatar,json=partnerAvatar,proto3" json:"partner_avatar,omitempty"`
+	IsMyTurn        bool   `protobuf:"varint,9,opt,name=is_my_turn,json=isMyTurn,proto3" json:"is_my_turn,omitempty"`
+	TurnTime        uint32 `protobuf:"varint,10,opt,name=turn_time,json=turnTime,proto3" json:"turn_time,omitempty"`
+	IsActive        bool   `protobuf:"varint,11,opt,name=is_active,json=isActive,proto3" json:"is_active,omitempty"`
+	Assign          bool   `protobuf:"varint,12,opt,name=assign,proto3" json:"assign,omitempty"`
+	Starter         string `protobuf:"bytes,13,opt,name=starter,proto3" json:"starter,omitempty"`
+	MsgCount        uint32 `protobuf:"varint,14,opt,name=msg_count,json=msgCount,proto3" json:"msg_count,omitempty"`
+	// 对话详情
+	Messages []*Message `protobuf:"bytes,20,rep,name=messages,proto3" json:"messages,omitempty"`
+	// 结果
+	Guessed bool  `protobuf:"varint,50,opt,name=guessed,proto3" json:"guessed,omitempty"`
+	Correct bool  `protobuf:"varint,51,opt,name=correct,proto3" json:"correct,omitempty"`
+	Score   int32 `protobuf:"varint,52,opt,name=score,proto3" json:"score,omitempty"`
+	// replica对话使用
+	CurNick     string `protobuf:"bytes,100,opt,name=cur_nick,json=curNick,proto3" json:"cur_nick,omitempty"`
+	CurPlatform string `protobuf:"bytes,101,opt,name=cur_platform,json=curPlatform,proto3" json:"cur_platform,omitempty"`
+	CurLocation string `protobuf:"bytes,102,opt,name=cur_location,json=curLocation,proto3" json:"cur_location,omitempty"`
+	// 知识库信息
+	KnowledgeCount  uint32 `protobuf:"varint,201,opt,name=knowledge_count,json=knowledgeCount,proto3" json:"knowledge_count,omitempty"`
+	KnowledgeStatus string `protobuf:"bytes,202,opt,name=knowledge_status,json=knowledgeStatus,proto3" json:"knowledge_status,omitempty"`
 }
 
 func (x *Info) Reset() {
@@ -346,11 +351,11 @@ func (x *Info) GetCurLocation() string {
 	return ""
 }
 
-func (x *Info) GetKnowledgeCount() string {
+func (x *Info) GetKnowledgeCount() uint32 {
 	if x != nil {
 		return x.KnowledgeCount
 	}
-	return ""
+	return 0
 }
 
 func (x *Info) GetKnowledgeStatus() string {
@@ -1245,7 +1250,7 @@ var file_chat_proto_rawDesc = []byte{
 	0x75, 0x72, 0x5f, 0x6c, 0x6f, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x66, 0x20, 0x01, 0x28,
 	0x09, 0x52, 0x0b, 0x63, 0x75, 0x72, 0x4c, 0x6f, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x28,
 	0x0a, 0x0f, 0x6b, 0x6e, 0x6f, 0x77, 0x6c, 0x65, 0x64, 0x67, 0x65, 0x5f, 0x63, 0x6f, 0x75, 0x6e,
-	0x74, 0x18, 0xc9, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0e, 0x6b, 0x6e, 0x6f, 0x77, 0x6c, 0x65,
+	0x74, 0x18, 0xc9, 0x01, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x0e, 0x6b, 0x6e, 0x6f, 0x77, 0x6c, 0x65,
 	0x64, 0x67, 0x65, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x12, 0x2a, 0x0a, 0x10, 0x6b, 0x6e, 0x6f, 0x77,
 	0x6c, 0x65, 0x64, 0x67, 0x65, 0x5f, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x18, 0xca, 0x01, 0x20,
 	0x01, 0x28, 0x09, 0x52, 0x0f, 0x6b, 0x6e, 0x6f, 0x77, 0x6c, 0x65, 0x64, 0x67, 0x65, 0x53, 0x74,

@@ -10,6 +10,7 @@ message Message {
 }
 
 message Info {
+  // 基本信息
   string chat_id = 1;
   uint32 chat_time = 2;
   string user_id = 3;
@@ -25,16 +26,20 @@ message Info {
   string starter = 13;
   uint32 msg_count = 14;
 
+  // 对话详情
   repeated Message messages = 20;
+  // 结果
   bool guessed = 50;
   bool correct = 51;
   int32 score = 52;
 
+  // replica对话使用
   string cur_nick = 100;
   string cur_platform = 101;
   string cur_location = 102;
 
-  string knowledge_count = 201;
+  // 知识库信息
+  uint32 knowledge_count = 201;
   string knowledge_status = 202;
 }
 
