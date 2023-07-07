@@ -7,6 +7,7 @@ message Message {
   string user = 2;
   int64 created_at = 3;
   string text = 4;
+  bool hit_knowledge = 5; // 命中知识
 }
 
 message Info {
