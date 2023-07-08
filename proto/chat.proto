@@ -42,6 +42,7 @@ message Info {
   // 知识库信息
   uint32 knowledge_count = 201;
   string knowledge_status = 202;
+  uint32 hit_knowledge_count = 203;
 }
 
 message NewChatReq {
