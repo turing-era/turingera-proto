@@ -53,7 +53,6 @@ message SaveAllKnowledgeReq {
 
 message SaveAllKnowledgeRsp {
   repeated KnowledgeInfo infos = 1;
-  string knowledge_status = 11;
 }
 
 message RemKnowledgeReq {
