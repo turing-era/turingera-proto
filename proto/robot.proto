@@ -102,6 +102,7 @@ message RobotDetail {
   Personality personality = 2;
   PhraseComb phrase = 3;
   repeated Experience experiences = 4;
+  string about_me = 5;
   bool use_knowledge = 20; // 是否使用自定义知识库
 }
 
