@@ -191,8 +191,8 @@ message UpdateDynamicRsp {
 
 message UpdateUseKnowledgeReq {
   string robot_id = 1;
-  bool use_knowledge = 2;
-  uint32 k_type = 3;
+  bool use_echo = 2;
+  bool use_about_me = 3;
 }
 
 message UpdateUseKnowledgeRsp {
