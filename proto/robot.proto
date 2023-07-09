@@ -102,8 +102,9 @@ message RobotDetail {
   Personality personality = 2;
   PhraseComb phrase = 3;
   repeated Experience experiences = 4;
-  string about_me = 5;
-  bool use_knowledge = 20; // 是否使用自定义知识库
+
+  bool use_echo = 20; // 是否使用秘密
+  bool use_about_me = 21; // 是否使用关于我
 }
 
 message GetEditOptionsReq {
