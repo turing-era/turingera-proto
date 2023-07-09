@@ -2,11 +2,17 @@ syntax = "proto3";
 package turingera.server.knowledge;
 option go_package = "github.com/turing-era/turingera-proto/go/server/knowledge";
 
+enum KnowledgeType {
+  K_TYPE_ECHO = 0;
+  K_TYPE_ABOUT_ME = 1;
+}
+
 message KnowledgeInfo  {
   string k_id = 1;
-  string user_id = 2;
-  string robot_id = 3;
-  string text = 4;
+  uint32 k_type = 2;
+  string user_id = 3;
+  string robot_id = 4;
+  string text = 5;
   int64 create_time = 10;
 }
 
@@ -57,6 +63,7 @@ message RemKnowledgeRsp {
 
 message LoadKnowledgeReq {
   string robot_id = 1;
+  uint32 k_type = 2;
 }
 
 message LoadKnowledgeRsp {
@@ -67,6 +74,7 @@ message SearchKnowledgeReq {
   string user_id = 1;
   string robot_id = 2;
   string text = 3;
+  uint32 k_type = 4;
 }
 
 message SearchKnowledgeRsp {
