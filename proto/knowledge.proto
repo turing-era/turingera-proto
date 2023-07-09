@@ -45,13 +45,15 @@ message SaveKnowledgeRsp {
 }
 
 message SaveAllKnowledgeReq {
-  repeated KnowledgeInfo infos = 1;
-  string knowledge_status = 2;
+  string robot_id = 1;
+  uint32 k_type = 2;
+  repeated string texts = 10;
+  string knowledge_status = 11;
 }
 
 message SaveAllKnowledgeRsp {
   repeated KnowledgeInfo infos = 1;
-  string knowledge_status = 2;
+  string knowledge_status = 11;
 }
 
 message RemKnowledgeReq {
