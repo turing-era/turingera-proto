@@ -77,6 +77,7 @@ message SearchKnowledgeReq {
   string robot_id = 2;
   string text = 3;
   uint32 k_type = 4;
+  uint32 topk = 5;
 }
 
 message SearchKnowledgeRsp {
