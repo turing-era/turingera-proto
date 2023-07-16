@@ -13,6 +13,7 @@ message KnowledgeInfo  {
   string user_id = 3;
   string robot_id = 4;
   string text = 5;
+  string pic = 6;
   int64 create_time = 10;
 }
 

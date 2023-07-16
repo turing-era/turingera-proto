@@ -6,8 +6,10 @@ message Message {
   string id = 1;
   string user = 2;
   int64 created_at = 3;
-  string text = 4;
-  bool hit_knowledge = 5; // 命中知识
+  string text = 4; // 文字
+  string pic = 5; // 图片
+  bool hit_knowledge = 10; // 命中知识
+  uint32 pleasure = 11; // 愉悦度数值
 }
 
 message Info {
