@@ -48,7 +48,7 @@ message SaveKnowledgeRsp {
 message SaveAllKnowledgeReq {
   string robot_id = 1;
   uint32 k_type = 2;
-  repeated string texts = 10;
+  repeated KnowledgeInfo infos = 10;
   string knowledge_status = 11;
 }
 
