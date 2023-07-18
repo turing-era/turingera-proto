@@ -26,7 +26,7 @@ message RankInfo {
   string desc = 2;
   int64 start_time = 3;
   int64 end_time = 4;
-  bool inuse = 5;
+  uint32 inuse = 5;
   uint32 rank_type = 10; // RankType
   uint32 rank_id = 11; // RankID
 }
