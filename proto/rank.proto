@@ -15,6 +15,12 @@ enum RankID {
   // TODO 其他ID在活动表配置，指定起始-结束时间
 }
 
+message MyRankInfo {
+  string user_id = 1;
+  uint32 score = 2;
+  uint32 rank = 3;
+}
+
 message RankInfo {
   string name = 1;
   string desc = 2;
@@ -23,7 +29,6 @@ message RankInfo {
   bool inuse = 5;
   uint32 rank_type = 10; // RankType
   uint32 rank_id = 11; // RankID
-  uint32 my_score = 12;
 }
 
 message RankItem {
@@ -41,7 +46,8 @@ message GetRankListReq {
 
 message GetRankListRsp {
   RankInfo rank_info = 1;
-  repeated RankItem items = 2;
+  MyRankInfo my_rank_info = 2;
+  repeated RankItem items = 3;
   bytes cookie = 10;
   bool is_end = 11;
 }
