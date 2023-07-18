@@ -27,7 +27,7 @@ message RankInfo {
 }
 
 message RankItem {
-  string user_id = 1;
+  string item_id = 1;
   string name = 2;
   string avatar = 3;
   uint32 score = 4;
@@ -47,7 +47,7 @@ message GetRankListRsp {
 }
 
 message UpdateScoreReq {
-  string user_id = 1;
+  string item_id = 1;
   uint32 score = 2;
   uint32 rank_type = 3; // RankType
 }
