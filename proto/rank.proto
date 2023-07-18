@@ -17,10 +17,12 @@ enum RankID {
 
 message RankInfo {
   string name = 1;
-  int64 start_time = 2;
-  int64 end_time = 3;
-  uint32 rank_type = 4; // RankType
-  uint32 rank_id = 5; // RankID
+  string desc = 2;
+  int64 start_time = 3;
+  int64 end_time = 4;
+  uint32 my_score = 5;
+  uint32 rank_type = 10; // RankType
+  uint32 rank_id = 11; // RankID
 }
 
 message RankItem {
@@ -56,6 +58,6 @@ message UpdateScoreRsp {
 service RankSvr {
   // 拉取排行榜
   rpc GetRankList(GetRankListReq) returns (GetRankListRsp);
-  // 同步分数
+  // 更新分数
   rpc UpdateScore(UpdateScoreReq) returns (UpdateScoreRsp);
 }

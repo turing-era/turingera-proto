@@ -24,7 +24,7 @@ const _ = grpc.SupportPackageIsVersion7
 type RankSvrClient interface {
 	// 拉取排行榜
 	GetRankList(ctx context.Context, in *GetRankListReq, opts ...grpc.CallOption) (*GetRankListRsp, error)
-	// 同步分数
+	// 更新分数
 	UpdateScore(ctx context.Context, in *UpdateScoreReq, opts ...grpc.CallOption) (*UpdateScoreRsp, error)
 }
 
@@ -60,7 +60,7 @@ func (c *rankSvrClient) UpdateScore(ctx context.Context, in *UpdateScoreReq, opt
 type RankSvrServer interface {
 	// 拉取排行榜
 	GetRankList(context.Context, *GetRankListReq) (*GetRankListRsp, error)
-	// 同步分数
+	// 更新分数
 	UpdateScore(context.Context, *UpdateScoreReq) (*UpdateScoreRsp, error)
 	mustEmbedUnimplementedRankSvrServer()
 }
