@@ -113,3 +113,9 @@ http:
     - selector: turingera.server.knowledge.KnowledgeSvr.LoadKnowledge
       post: /knowledge/LoadKnowledge
       body: "*"
+
+    #----- rank 排行榜服务 ----- #
+    # 拉取排行榜
+    - selector: turingera.server.rank.RankSvr.GetRankList
+      post: /rank/GetRankList
+      body: "*"

@@ -1,0 +1,61 @@
+syntax = "proto3";
+package turingera.server.rank;
+option go_package = "github.com/turing-era/turingera-proto/go/server/rank";
+
+enum RankType {
+  RANK_TYPE_UNKNOWN = 0; // 未知
+  RANK_TYPE_SCORE = 1; // 积分
+  RANK_TYPE_INVITE = 2; // 邀请
+}
+
+enum RankID {
+  RANK_ID_UNKNOWN = 0; // 未知
+  RANK_ID_WEEK = 100; // 周榜
+  RANK_ID_MONTH = 200; // 月榜
+  // TODO 其他ID在活动表配置，指定起始-结束时间
+}
+
+message RankInfo {
+  string name = 1;
+  int64 start_time = 2;
+  int64 end_time = 3;
+  uint32 rank_type = 4; // RankType
+  uint32 rank_id = 5; // RankID
+}
+
+message RankItem {
+  string user_id = 1;
+  string name = 2;
+  string avatar = 3;
+  uint32 score = 4;
+}
+
+message GetRankListReq {
+  uint32 rank_type = 1; // RankType
+  uint32 rank_id = 2; // RankID
+  bytes cookie = 10;
+}
+
+message GetRankListRsp {
+  RankInfo rank_info = 1;
+  repeated RankItem items = 2;
+  bytes cookie = 10;
+  bool is_end = 11;
+}
+
+message UpdateScoreReq {
+  string user_id = 1;
+  uint32 score = 2;
+  uint32 rank_type = 3; // RankType
+}
+
+message UpdateScoreRsp {
+
+}
+
+service RankSvr {
+  // 拉取排行榜
+  rpc GetRankList(GetRankListReq) returns (GetRankListRsp);
+  // 同步分数
+  rpc UpdateScore(UpdateScoreReq) returns (UpdateScoreRsp);
+}
