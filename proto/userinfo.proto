@@ -10,7 +10,8 @@ message UserInfo {
   string platform_uid = 5;
   string email = 6;
   int64 register_time = 7;
-  string invite_code = 8;
+  string early_access_code = 8;
+  string invite_code = 9;
   UserDynamic dynamic = 100;
 }
 

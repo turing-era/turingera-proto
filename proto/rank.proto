@@ -12,7 +12,7 @@ enum RankID {
   RANK_ID_UNKNOWN = 0; // 未知
   RANK_ID_WEEK = 100; // 周榜
   RANK_ID_MONTH = 200; // 月榜
-  // TODO 其他ID在活动表配置，指定起始-结束时间
+  // 其他ID在活动表配置，指定起始-结束时间
 }
 
 message MyRankInfo {
