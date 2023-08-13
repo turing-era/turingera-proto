@@ -8,6 +8,7 @@ message Message {
   int64 created_at = 3;
   string text = 4; // 文字
   string pic = 5; // 图片
+  string video = 6; // 视频
   bool hit_knowledge = 10; // 命中知识
   uint32 pleasure = 11; // 愉悦度数值
 }
