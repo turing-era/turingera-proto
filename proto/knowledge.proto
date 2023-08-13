@@ -7,14 +7,23 @@ enum KnowledgeType {
   K_TYPE_ABOUT_ME = 1;
 }
 
+enum KAttachType {
+  k_ATTACH_TYPE_PIC = 0;
+  k_ATTACH_TYPE_VIDEO = 1;
+}
+
+message KAttach {
+  uint32 attach_type = 1; // KAttachType
+  string attach_url = 2;
+}
+
 message KnowledgeInfo  {
   string k_id = 1;
   uint32 k_type = 2;
   string user_id = 3;
   string robot_id = 4;
   string text = 5;
-  string pic = 6;
-  string video = 7;
+  repeated KAttach k_attaches = 6;
   int64 create_time = 10;
 }
 
